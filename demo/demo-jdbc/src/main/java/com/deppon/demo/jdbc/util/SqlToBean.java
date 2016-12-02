@@ -3,12 +3,16 @@ package com.deppon.demo.jdbc.util;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
+import javax.sql.DataSource;
+
+import com.deppon.demo.jdbc.DataSourceFactory;
 import com.deppon.demo.jdbc.SingleThreadConnectionHolder;
-import com.mysql.jdbc.Statement;
 
 public class SqlToBean {
-	 public Object getObject(String className, int Id) {
+	 public Object getObject(String className, int Id) throws SQLException {
 	        // 得到表名字
 	        String tableName = className.substring(className.lastIndexOf(".") + 1,
 	                className.length());
@@ -25,7 +29,8 @@ public class SqlToBean {
 	        String sql = "select * from " + tableName + " where Id=" + Id;
 	        System.out.println("查找sql语句：" + sql);
 	        // 获得数据库链接
-	        Connection con = new SingleThreadConnectionHolder().getConnection(dataSource)();
+	        DataSource ds=DataSourceFactory.createDataSource();
+	        Connection con=SingleThreadConnectionHolder.getConnection(ds);
 	        // 创建类的实例
 	        Object obj = null;
 	        try {
@@ -65,5 +70,4 @@ public class SqlToBean {
 	        }
 	        return obj;
 	    }
-	}
 }

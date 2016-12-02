@@ -18,10 +18,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.keyuan.entity.Student;
-import org.keyuan.util.DBConnectionUtil;
 
 /**
  * 
@@ -32,6 +31,14 @@ import org.keyuan.util.DBConnectionUtil;
  */
 public class Session {
 	private Connection conn = null;
+	
+	public Connection getConnection() throws SQLException{
+		if(null==conn){
+			DataSource ds=DataSourceFactory.createDataSource();
+			conn=SingleThreadConnectionHolder.getConnection(ds);
+		}
+		return conn;
+	}
 	/**
 	 * 添加操作
 	 */
@@ -87,8 +94,7 @@ public class Session {
 		insertSql.append(insertSqlValue);
 		System.out.println(insertSql);
 		// 执行添加操作了
-		conn = DBConnectionUtil.getConnection();
-		PreparedStatement prep = conn.prepareStatement(insertSql.toString());
+		PreparedStatement prep = getConnection().prepareStatement(insertSql.toString());
 		int i = 1;
 		for (Object param : insertParams) {
 			if (param instanceof Date) {
@@ -196,8 +202,7 @@ public class Session {
 		updateSql.append(" where tab.").append(primaryKeyColumn).append("=?");
 		System.out.println(updateSql);
 
-		conn = DBConnectionUtil.getConnection();
-		PreparedStatement prep = conn.prepareStatement(updateSql.toString());
+		PreparedStatement prep = getConnection().prepareStatement(updateSql.toString());
 		int i = 1;
 		for (Object param : updateParams) {
 			if (param instanceof Date) {
@@ -244,9 +249,8 @@ public class Session {
 			if (isfindPrimary)
 				break;
 		}
-		conn = DBConnectionUtil.getConnection();
 		System.out.println(deleteSql.toString());
-		PreparedStatement prep = conn.prepareStatement(deleteSql.toString());
+		PreparedStatement prep = getConnection().prepareStatement(deleteSql.toString());
 		prep.setInt(1, primaryParam);
 		if (prep.executeUpdate() > 0)
 			return true;
@@ -297,8 +301,7 @@ public class Session {
 
 		}
 		System.out.println(selectByIdSql.toString());
-		conn = DBConnectionUtil.getConnection();
-		PreparedStatement prep = conn
+		PreparedStatement prep = getConnection()
 				.prepareStatement(selectByIdSql.toString());
 		prep.setInt(1, id);
 		ResultSet result = prep.executeQuery();
@@ -354,8 +357,7 @@ public class Session {
 		String tableName = getTableName(entityClass);
 		pageIngSql.append(tableName).append(" tab ) where rn between ? and ?");
 		System.out.println(pageIngSql.toString());
-		conn = DBConnectionUtil.getConnection();
-		PreparedStatement prep = conn.prepareStatement(pageIngSql.toString());
+		PreparedStatement prep = getConnection().prepareStatement(pageIngSql.toString());
 
 		prep.setInt(1, firstIndex);
 		prep.setInt(2, firstIndex + maxResult);
@@ -378,15 +380,14 @@ public class Session {
 		String tableName = getTableName(entityClass);
 		countSql.append(tableName);
 		System.out.println(countSql.toString());
-		conn = DBConnectionUtil.getConnection();
-		PreparedStatement prep = conn.prepareStatement(countSql.toString());
+		PreparedStatement prep = getConnection().prepareStatement(countSql.toString());
 		ResultSet result = prep.executeQuery();
 		if (result.next()) {
 			count = result.getInt("count");
 		}
 		return count;
 	}
-	//测试
+	/*//测试
 	public static void main(String[] args) throws SecurityException,
 			IllegalArgumentException, NoSuchMethodException,
 			IllegalAccessException, SQLException, ClassNotFoundException,
@@ -396,14 +397,14 @@ public class Session {
 		student.setStuId(2);
 		student.setStuName("hhhh");
 		student.setBirthday(new Date());
-		/*
+		
 		if (session.save(student)) {
 			System.out.println("添加成功");
 		} else {
 			System.out.println("添加失败");
 		}
-		*/
-		/*
+		
+		
 		 * student.setStuId(43); 
 		 * if (session.update(student)) {
 		 *  System.out.println("修改成功"); 
@@ -411,25 +412,25 @@ public class Session {
 		 * else {
 		 *  System.out.println("修改失败");
 		 *   }
-		 */
+		 
 
-		/*
+		
 		 * student.setStuId(42); 
 		 * if (session.delete(student)) {
 		 *  System.out.println("删除成功");
 		 *  } else { 
 		 *  System.out.println("删除失败");
 		 *   }
-		 */
-		/*
+		 
+		
 		 * 根据id查询 student = session.get(Student.class, 41);
 		 * System.out.println(student.getStuId() + " name:" +
 		 * student.getStuName() + "  birthday:" + student.getBirthday());
-		 */
+		 
 
-		/*
+		
 		 * 分页查询
-		 */
+		 
 		int currentPage = 1;
 		int maxResult = 2;
 		int count = session.getCount(Student.class);
@@ -446,6 +447,6 @@ public class Session {
 					+ student2.getStuName() + "\t" + student2.getBirthday());
 		}
 		
-	}
+	}*/
 
 }
