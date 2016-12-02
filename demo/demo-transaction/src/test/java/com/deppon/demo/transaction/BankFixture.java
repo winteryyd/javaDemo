@@ -10,6 +10,8 @@ import javax.sql.DataSource;
 
 import org.junit.Before;
 
+import com.deppon.demo.jdbc.DataSourceFactory;
+
 public class BankFixture
 {
 

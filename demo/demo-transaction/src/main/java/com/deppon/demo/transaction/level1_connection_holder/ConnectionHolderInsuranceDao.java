@@ -1,10 +1,13 @@
 package com.deppon.demo.transaction.level1_connection_holder;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
+import com.deppon.demo.jdbc.SingleThreadConnectionHolder;
 
 /**
  * Created with IntelliJ IDEA.

@@ -11,67 +11,12 @@
 	<artifactId>demo-transaction</artifactId>
 	<name>demo-transaction</name>
 	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.java.version>1.6</project.java.version>
-		<maven.compiler.debug>true</maven.compiler.debug>
-		<maven.compiler.optimize>false</maven.compiler.optimize>
-		<maven.surefire.forkmode>always</maven.surefire.forkmode>
-		<log4j.configuration>log4j/log4j.properties</log4j.configuration>
-		<spring.batch.version>2.1.8.RELEASE</spring.batch.version>
-		<spring.framework.version>3.1.0.RELEASE</spring.framework.version>
-		<slf4j.version>1.6.4</slf4j.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.38</version>
+			<groupId>com.deppon</groupId>
+			<artifactId>demo-jdbc</artifactId>
+			<version>${project.parent.version}</version>
 		</dependency>
-		<!-- commons -->
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>3.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-pool</groupId>
-			<artifactId>commons-pool</artifactId>
-			<version>1.6</version>
-		</dependency>
-		<!-- slf4j logging facade -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-		</dependency>
-		<!-- Spring (core) Framework dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
