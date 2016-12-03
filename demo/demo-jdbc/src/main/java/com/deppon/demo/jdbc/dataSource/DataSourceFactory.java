@@ -1,4 +1,4 @@
-package com.deppon.demo.jdbc;
+package com.deppon.demo.jdbc.dataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 

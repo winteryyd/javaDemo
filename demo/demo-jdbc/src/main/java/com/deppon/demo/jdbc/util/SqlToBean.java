@@ -8,8 +8,8 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import com.deppon.demo.jdbc.DataSourceFactory;
-import com.deppon.demo.jdbc.SingleThreadConnectionHolder;
+import com.deppon.demo.jdbc.connection.SingleThreadConnectionHolder;
+import com.deppon.demo.jdbc.dataSource.DataSourceFactory;
 
 public class SqlToBean {
 	 public Object getObject(String className, int Id) throws SQLException {

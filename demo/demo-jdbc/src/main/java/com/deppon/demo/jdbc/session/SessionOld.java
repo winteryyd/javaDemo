@@ -1,4 +1,4 @@
-package com.deppon.demo.jdbc;
+package com.deppon.demo.jdbc.session;
 
 
 import java.lang.annotation.Annotation;
@@ -22,6 +22,9 @@ import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import com.deppon.demo.jdbc.connection.SingleThreadConnectionHolder;
+import com.deppon.demo.jdbc.dataSource.DataSourceFactory;
+
 /**
  * 
  * 说明：使用java的反射机制模拟hibernate的session
@@ -29,7 +32,7 @@ import org.apache.commons.beanutils.BeanUtils;
  * @author KeYuan
  * 
  */
-public class Session {
+public class SessionOld {
 	private Connection conn = null;
 	
 	public Connection getConnection() throws SQLException{
@@ -42,9 +45,7 @@ public class Session {
 	/**
 	 * 添加操作
 	 */
-	public boolean save(Object entity) throws SecurityException,
-			NoSuchMethodException, IllegalArgumentException,
-			IllegalAccessException, SQLException, ClassNotFoundException {
+	public boolean save(Object entity) throws SecurityException,NoSuchMethodException, IllegalArgumentException,IllegalAccessException, SQLException, ClassNotFoundException {
 		StringBuffer insertSql = new StringBuffer("insert into ");
 		StringBuffer insertSqlValue = new StringBuffer();
 		LinkedList<Object> insertParams = new LinkedList<Object>();

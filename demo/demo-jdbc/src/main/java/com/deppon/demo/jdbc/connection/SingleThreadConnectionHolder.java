@@ -1,4 +1,4 @@
-package com.deppon.demo.jdbc;
+package com.deppon.demo.jdbc.connection;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -8,7 +8,7 @@ public class SingleThreadConnectionHolder
 {
     private static ThreadLocal<ConnectionHolder> localConnectionHolder = new ThreadLocal<ConnectionHolder>();
 
-    public static Connection getConnection(DataSource dataSource) throws SQLException
+    public static Connection getConnection(DataSource dataSource)
     {
         return getConnectionHolder().getConnection(dataSource);
     }

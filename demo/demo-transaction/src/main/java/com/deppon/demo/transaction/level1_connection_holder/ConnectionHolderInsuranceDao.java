@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import com.deppon.demo.jdbc.SingleThreadConnectionHolder;
+import com.deppon.demo.jdbc.connection.SingleThreadConnectionHolder;
 
 /**
  * Created with IntelliJ IDEA.

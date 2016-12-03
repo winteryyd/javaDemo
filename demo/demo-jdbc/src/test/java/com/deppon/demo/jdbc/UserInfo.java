@@ -1,12 +1,21 @@
-package com.deppon.demo.jdbc.entity;
+package com.deppon.demo.jdbc;
+
+import java.util.Date;
 
 public class UserInfo {
 	private int id;
 	private String name;
 	private String pwd;
-	private int age;
+	private Date age;
 
-	@Override
+	public Date getAge() {
+		return age;
+	}
+
+	public void setAge(Date age) {
+		this.age = age;
+	}
+
 	public String toString() {
 		return "UserInfo [id=" + id + ", name=" + name + ", pwd=" + pwd
 				+ ", age=" + age + "]";
@@ -34,14 +43,6 @@ public class UserInfo {
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 }
