@@ -388,6 +388,8 @@ public class SessionOld {
 		}
 		return count;
 	}
+	
+	
 	/*//测试
 	public static void main(String[] args) throws SecurityException,
 			IllegalArgumentException, NoSuchMethodException,
