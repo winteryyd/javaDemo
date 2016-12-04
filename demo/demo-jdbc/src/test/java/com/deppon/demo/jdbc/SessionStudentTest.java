@@ -55,7 +55,8 @@ public class SessionStudentTest {
 	}
 	
 	@After
-	public void closeConnection(){
+	public void close(){
+		session.dropTable(Student.class);
 		session.close();
 	}
 }

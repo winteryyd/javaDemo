@@ -5,8 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 public class TableEntity {
+	//主键
 	private String primarykey;
+	//表名
 	private String tableName;
+	//列信息
 	private List<ColumnEntity> columnEntitys;
 
 	public List<ColumnEntity> getColumnEntitys() {

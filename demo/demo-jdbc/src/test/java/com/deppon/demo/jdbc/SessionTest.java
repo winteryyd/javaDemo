@@ -66,7 +66,8 @@ public class SessionTest {
 	}
 	
 	@After
-	public void closeConnection(){
+	public void close(){
+		session.dropTable(UserInfo.class);
 		session.close();
 	}
 }
