@@ -47,9 +47,11 @@ public class TableEntity {
 	 * @return
 	 */
 	public String getCreateTableSql() {
-		if (columnEntitys.size() == 0) {
+		if(null==tableName||"".equals(tableName))
 			return null;
-		}
+		if (columnEntitys.size() == 0)
+			return null;
+		
 		StringBuffer sql = new StringBuffer("CREATE TABLE ");
 		sql.append(tableName).append("(\n");
 		for (int i = 0; i < columnEntitys.size(); i++) {
@@ -70,13 +72,19 @@ public class TableEntity {
 		sql.append("\n)");
 		return sql.toString();
 	}
-	
+	/**
+	 * 插入语句
+	 * @return
+	 */
 	public String getInsertSql(){
+		if(null==tableName||"".equals(tableName))
+			return null;
 		StringBuffer insertSql = new StringBuffer("insert into "+getTableName());
 		StringBuffer insertSqlValue = new StringBuffer();
 		insertSql.append(" (");
 		insertSqlValue.append(" values(");
-		for (ColumnEntity columnEntity : columnEntitys) {
+		for (int i=0;i<columnEntitys.size();i++) {
+			ColumnEntity columnEntity = columnEntitys.get(i);
 			insertSql.append(columnEntity.getColumnName()+",");
 			if(columnEntity.getValue() instanceof Date){
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -84,12 +92,74 @@ public class TableEntity {
 			}else{
 				insertSqlValue.append("'"+columnEntity.getValue()+"',");
 			}
+			if (i != columnEntitys.size() - 1) {
+				insertSql.append(",\n");
+				insertSqlValue.append(",\n");
+			}
 		}
-		insertSql.replace(insertSql.lastIndexOf(","), insertSql.length(), ")");
-		insertSqlValue.replace(insertSqlValue.lastIndexOf(","), insertSqlValue
-				.length(), ")");
 		// 拼接两部分的sql
-		insertSql.append(insertSqlValue);
+		insertSql.append(")"+insertSqlValue+")");
 		return insertSql.toString();
+	}
+	/**
+	 * 查询语句
+	 * @return
+	 */
+	public String getSelectSQL(){
+		if(null==tableName||"".equals(tableName)||null==primarykey||"".equals(primarykey))
+			return null;
+		StringBuffer insertSql = new StringBuffer("select * from "+tableName+" temp where temp."+primarykey+"=");
+		return insertSql.toString();
+	}
+	/**
+	 * 更新语句
+	 * @return
+	 */
+	public String getUpdateSql() {
+		if(null==tableName||"".equals(tableName)||null==primarykey||"".equals(primarykey))
+			return null;
+		StringBuffer updateSql = new StringBuffer("update "+tableName+" set ");
+		Object id = null;
+		for (int i=0;i<columnEntitys.size();i++) {
+			ColumnEntity columnEntity = columnEntitys.get(i);
+			
+			updateSql.append(columnEntity.getColumnName()+"=");
+			if(columnEntity.getValue() instanceof Date){
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				updateSql.append("'"+dateFormat.format(columnEntity.getValue())+"'");
+			}else{
+				updateSql.append("'"+columnEntity.getValue()+"'");
+			}
+			if (i != columnEntitys.size() - 1) {
+				updateSql.append(",\n");
+			}
+			if(primarykey.equals(columnEntity.getColumnName())){
+				id = columnEntity.getValue();
+			}
+		}
+		if(id==null)
+			return null;
+		updateSql.append(" where ").append(primarykey).append("="+id);
+		return updateSql.toString();
+	}
+	/**
+	 * 删除语句
+	 * @return
+	 */
+	public String getDeleteSql() {
+		if(null==tableName||"".equals(tableName)||null==primarykey||"".equals(primarykey))
+			return null;
+		StringBuffer deleteSql = new StringBuffer("delete from "+tableName+"  where "+primarykey+"=");
+		Object id = null;
+		for (int i=0;i<columnEntitys.size();i++) {
+			ColumnEntity columnEntity = columnEntitys.get(i);
+			if(primarykey.equals(columnEntity.getColumnName())){
+				id = columnEntity.getValue();
+			}
+		}
+		if(id==null)
+			return null;
+		deleteSql.append(id);
+		return deleteSql.toString();
 	}
 }

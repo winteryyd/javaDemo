@@ -2,12 +2,17 @@ package com.deppon.demo.jdbc.session;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import com.deppon.demo.jdbc.connection.SingleThreadConnectionHolder;
 import com.deppon.demo.jdbc.dataSource.DataSourceFactory;
+import com.deppon.demo.jdbc.entity.ColumnEntity;
+import com.deppon.demo.jdbc.entity.TableEntity;
 import com.deppon.demo.jdbc.util.SessionUtil;
 
 public class Session {
@@ -46,6 +51,39 @@ public class Session {
 		return false;
 	}
 	/**
+	 * 执行查询SQL语句
+	 * @param sql
+	 * @return
+	 */
+	public ResultSet executeQuery(String sql){
+		PreparedStatement prep = null;
+		try {
+			prep = conn.prepareStatement(sql);
+			if(null==prep)
+				return null;
+			return prep.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	/**
+	 * 执行DDL SQL语句
+	 * @param sql
+	 * @return
+	 */
+	public boolean executeUpdate(String sql){
+		PreparedStatement prep = null;
+		try {
+			prep = conn.prepareStatement(sql);
+			if (prep.executeUpdate() > 0)
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	/**
 	 * 根据entity删除表
 	 * @param entityClass
 	 * @return
@@ -59,11 +97,11 @@ public class Session {
 	 * @param entityClass
 	 * @return
 	 */
-	public boolean createTable(Object entity){
-		dropTable(entity.getClass());
+	public boolean createTable(Class<?> entityClass){
+		dropTable(entityClass);
 		String sql = null;
 		try {
-			sql = SessionUtil.getTableEntity(entity).getCreateTableSql();
+			sql = SessionUtil.getTableEntity(entityClass).getCreateTableSql();
 			System.out.println(sql);
 			if(null==sql)
 				return false;
@@ -78,7 +116,6 @@ public class Session {
 	 * @return
 	 */
 	public boolean save(Object entity){
-		
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getInsertSql();
@@ -89,5 +126,69 @@ public class Session {
 		}
 		return execute(sql);
 	}
-	
+	/**
+	 * 根据Id返回实体
+	 * @param entityClass
+	 * @param id
+	 * @return
+	 */
+	public <T> T get(Class<T> entityClass,Object id){
+		String sql = null;
+		TableEntity tableEntity = null;
+		try {
+			tableEntity = SessionUtil.getTableEntity(entityClass);
+			sql = tableEntity.getSelectSQL();
+			if(null==sql)
+				return null;
+			sql = sql+id;
+			
+			ResultSet result = executeQuery(sql);
+			
+			// 把数据组拼到对象中去
+			T entity = entityClass.newInstance();
+			
+			for(int i=0;i<tableEntity.getColumnEntitys().size();i++){
+				ColumnEntity columnEntity = tableEntity.getColumnEntitys().get(i);
+				Object value = result.getObject(columnEntity.getColumnName());
+				BeanUtils.setProperty(entity, columnEntity.getProperty(), value);
+			}
+			return entity;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	/**
+	 * 更新实体数据
+	 * @param entity
+	 * @return
+	 */
+	public boolean update(Object entity){
+		String sql = null;
+		try {
+			sql = SessionUtil.getTableEntity(entity).getUpdateSql();
+			if(null==sql)
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return executeUpdate(sql);
+	}
+	/**
+	 * 删除实体数据
+	 * @param entity
+	 * @return
+	 */
+	public boolean delete(Object entity){
+		String sql = null;
+		try {
+			sql = SessionUtil.getTableEntity(entity).getDeleteSql();
+			if(null==sql)
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return executeUpdate(sql);
+	}
 }

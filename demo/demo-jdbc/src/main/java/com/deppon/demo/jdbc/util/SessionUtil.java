@@ -93,6 +93,93 @@ public class SessionUtil {
 			} catch (IllegalAccessException e1) {
 				e1.printStackTrace();
 			}
+			//得到属性的注解
+			Annotation[] annotationField = field.getAnnotations();
+			if (annotationField.length != 0) {
+				for (Annotation annotation : annotationField) {
+					//判断是否是主键
+					if (annotation instanceof Id) {
+						if (primaryKeyColumn.length() == 0) {
+							primaryKeyColumn = field.getName();
+						} else {
+							primaryKeyColumn = primaryKeyColumn + ","
+									+ field.getName();
+						}
+					}
+					//一般行注解
+					if (annotation instanceof Column) {
+						Column column = (Column) annotation;
+						columnEntity.setColumnName(column.name());
+						if(isLength(columnEntity.getType())){
+							columnEntity.setLength(column.length());
+						}
+					}
+				}
+				columnEntitys.add(columnEntity);
+				continue;
+			}
+			String getMethodName = "get"
+					+ field.getName().substring(0, 1).toUpperCase()
+					+ field.getName().substring(1);
+			Method method = null;
+			try {
+				method = entityClass.getMethod(getMethodName, new Class[] {});
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			}
+			// 同上判断这个方法有没有我们要找的annotation
+			Annotation[] annotationMethod = method.getAnnotations();
+			if (annotationMethod.length != 0) {
+				for (Annotation annotation : annotationMethod) {
+					if (annotation instanceof Id) {
+						if (primaryKeyColumn.length() == 0) {
+							primaryKeyColumn = field.getName();
+						} else {
+							primaryKeyColumn = primaryKeyColumn + ","
+									+ field.getName();
+						}
+					}
+					if (annotation instanceof Column) {
+						Column column = (Column) annotation;
+						columnEntity.setColumnName(column.name());
+						if(isLength(columnEntity.getType())){
+							columnEntity.setLength(column.length());
+						}
+					}
+				}
+				columnEntitys.add(columnEntity);
+				continue;
+			}
+			if("id".equals(columnEntity.getColumnName())&&primaryKeyColumn.length()==0){
+				primaryKeyColumn = columnEntity.getColumnName();
+			}
+			if(isLength(columnEntity.getType())){
+				columnEntity.setLength(255);
+			}
+			columnEntitys.add(columnEntity);
+		}
+		t.setPrimarykey(primaryKeyColumn);
+		t.setColumnEntitys(columnEntitys);
+		return t;
+	}
+	/**
+	 * 由entityClass组装TableEntity
+	 * @param entityClass
+	 * @return
+	 */
+	public static TableEntity getTableEntity(Class<?> entityClass){
+		TableEntity t = new TableEntity();
+		List<ColumnEntity> columnEntitys = new ArrayList<ColumnEntity>();
+		t.setTableName(getTableName(entityClass));
+		Field[] fields = entityClass.getDeclaredFields();
+		String primaryKeyColumn = "";
+		for (Field field : fields) {
+			ColumnEntity columnEntity = new ColumnEntity();
+			columnEntity.setProperty(field.getName());
+			columnEntity.setColumnName(field.getName());
+			columnEntity.setType(javaTypeToMySqlType(field.getType().getSimpleName()));
 			Annotation[] annotationField = field.getAnnotations();
 			if (annotationField.length != 0) {
 				for (Annotation annotation : annotationField) {
