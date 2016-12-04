@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.deppon.demo.jdbc.SessionStudentTest;
 import com.deppon.demo.jdbc.connection.SingleThreadConnectionHolder;
 import com.deppon.demo.jdbc.dataSource.DataSourceFactory;
 import com.deppon.demo.jdbc.entity.ColumnEntity;
@@ -16,6 +19,9 @@ import com.deppon.demo.jdbc.entity.TableEntity;
 import com.deppon.demo.jdbc.util.SessionUtil;
 
 public class Session {
+	
+	private static final Logger logger = LoggerFactory.getLogger(Session.class);
+	
 	private Connection conn = null;
 
 	public Session() {
@@ -90,7 +96,7 @@ public class Session {
 	 */
 	public boolean dropTable(Class<?> entityClass){
 		String sql = "DROP TABLE IF EXISTS "+SessionUtil.getTableName(entityClass)+";";
-		System.out.println(sql);
+		logger.info(sql);
 		return execute(sql);
 	}
 	/**
@@ -103,7 +109,7 @@ public class Session {
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entityClass).getCreateTableSql();
-			System.out.println(sql);
+			logger.info(sql);
 			if(null==sql)
 				return false;
 		} catch (Exception e) {
@@ -120,7 +126,7 @@ public class Session {
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getInsertSql();
-			System.out.println(sql);
+			logger.info(sql);
 			if(null==sql)
 				return false;
 		} catch (Exception e) {
@@ -143,7 +149,7 @@ public class Session {
 			if(null==sql)
 				return null;
 			sql = sql+id;
-			System.out.println(sql);
+			logger.info(sql);
 			ResultSet result = executeQuery(sql);
 			result.next();
 			// 把数据组拼到对象中去
@@ -170,7 +176,7 @@ public class Session {
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getUpdateSql();
-			System.out.println(sql);
+			logger.info(sql);
 			if(null==sql)
 				return false;
 		} catch (Exception e) {
@@ -187,7 +193,7 @@ public class Session {
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getDeleteSql();
-			System.out.println(sql);
+			logger.info(sql);
 			if(null==sql)
 				return false;
 		} catch (Exception e) {

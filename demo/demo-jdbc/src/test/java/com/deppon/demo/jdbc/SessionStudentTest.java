@@ -7,10 +7,13 @@ import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.deppon.demo.jdbc.session.Session;
 
 public class SessionStudentTest {
+	
 	public Session session;
 	private Student student; 
 	@Before
@@ -51,12 +54,12 @@ public class SessionStudentTest {
 	public void TestDelete(){
 		boolean bool = session.delete(student);
 		System.out.println("TestDelete:"+bool);
+		session.dropTable(Student.class);
 		assertEquals(true, bool);
 	}
 	
 	@After
 	public void close(){
-		session.dropTable(Student.class);
 		session.close();
 	}
 }
