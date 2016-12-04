@@ -81,24 +81,24 @@ public class TableEntity {
 			return null;
 		StringBuffer insertSql = new StringBuffer("insert into "+getTableName());
 		StringBuffer insertSqlValue = new StringBuffer();
-		insertSql.append(" (");
-		insertSqlValue.append(" values(");
+		insertSql.append("\n (");
+		insertSqlValue.append("values\n (");
 		for (int i=0;i<columnEntitys.size();i++) {
 			ColumnEntity columnEntity = columnEntitys.get(i);
-			insertSql.append(columnEntity.getColumnName()+",");
+			insertSql.append(columnEntity.getColumnName());
 			if(columnEntity.getValue() instanceof Date){
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				insertSqlValue.append("'"+dateFormat.format(columnEntity.getValue())+"',");
+				insertSqlValue.append("'"+dateFormat.format(columnEntity.getValue())+"'");
 			}else{
-				insertSqlValue.append("'"+columnEntity.getValue()+"',");
+				insertSqlValue.append("'"+columnEntity.getValue()+"'");
 			}
 			if (i != columnEntitys.size() - 1) {
-				insertSql.append(",\n");
-				insertSqlValue.append(",\n");
+				insertSql.append(",");
+				insertSqlValue.append(",");
 			}
 		}
 		// 拼接两部分的sql
-		insertSql.append(")"+insertSqlValue+")");
+		insertSql.append(")\n"+insertSqlValue+")");
 		return insertSql.toString();
 	}
 	/**
@@ -108,7 +108,7 @@ public class TableEntity {
 	public String getSelectSQL(){
 		if(null==tableName||"".equals(tableName)||null==primarykey||"".equals(primarykey))
 			return null;
-		StringBuffer insertSql = new StringBuffer("select * from "+tableName+" temp where temp."+primarykey+"=");
+		StringBuffer insertSql = new StringBuffer("select * from "+tableName+" where "+primarykey+"=");
 		return insertSql.toString();
 	}
 	/**
@@ -118,12 +118,12 @@ public class TableEntity {
 	public String getUpdateSql() {
 		if(null==tableName||"".equals(tableName)||null==primarykey||"".equals(primarykey))
 			return null;
-		StringBuffer updateSql = new StringBuffer("update "+tableName+" set ");
+		StringBuffer updateSql = new StringBuffer("update "+tableName+"\nset");
 		Object id = null;
 		for (int i=0;i<columnEntitys.size();i++) {
 			ColumnEntity columnEntity = columnEntitys.get(i);
 			
-			updateSql.append(columnEntity.getColumnName()+"=");
+			updateSql.append("  "+columnEntity.getColumnName()+"=");
 			if(columnEntity.getValue() instanceof Date){
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				updateSql.append("'"+dateFormat.format(columnEntity.getValue())+"'");
@@ -139,7 +139,7 @@ public class TableEntity {
 		}
 		if(id==null)
 			return null;
-		updateSql.append(" where ").append(primarykey).append("="+id);
+		updateSql.append("\nwhere ").append(primarykey).append("="+id);
 		return updateSql.toString();
 	}
 	/**

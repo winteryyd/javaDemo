@@ -19,7 +19,7 @@ public class Student {
 	public void setStuId(int stuId) {
 		this.stuId = stuId;
 	}
-	@Column(name="stuName1")
+	@Column(name="stuName1",length=20)
 	public String getStuName() {
 		return stuName;
 	}

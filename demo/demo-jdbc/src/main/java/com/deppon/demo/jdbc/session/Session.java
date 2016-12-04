@@ -90,6 +90,7 @@ public class Session {
 	 */
 	public boolean dropTable(Class<?> entityClass){
 		String sql = "DROP TABLE IF EXISTS "+SessionUtil.getTableName(entityClass)+";";
+		System.out.println(sql);
 		return execute(sql);
 	}
 	/**
@@ -119,6 +120,7 @@ public class Session {
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getInsertSql();
+			System.out.println(sql);
 			if(null==sql)
 				return false;
 		} catch (Exception e) {
@@ -141,9 +143,9 @@ public class Session {
 			if(null==sql)
 				return null;
 			sql = sql+id;
-			
+			System.out.println(sql);
 			ResultSet result = executeQuery(sql);
-			
+			result.next();
 			// 把数据组拼到对象中去
 			T entity = entityClass.newInstance();
 			
@@ -168,6 +170,7 @@ public class Session {
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getUpdateSql();
+			System.out.println(sql);
 			if(null==sql)
 				return false;
 		} catch (Exception e) {
@@ -184,11 +187,24 @@ public class Session {
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getDeleteSql();
+			System.out.println(sql);
 			if(null==sql)
 				return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return executeUpdate(sql);
+	}
+
+	public void close() {
+		if (null != conn) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				conn=null;
+			}
+		}
 	}
 }
