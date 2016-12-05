@@ -32,6 +32,7 @@ public class SchedulerFactory {
 	
     public void startSchedule() throws SchedulerException{
     	Collection<ScheduleJob> jobList =  jobMap.values();
+    	System.out.println(jobList.size());
 		for (ScheduleJob job : jobList) {
 			TriggerKey triggerKey = TriggerKey.triggerKey(job.getJobName(), job.getJobGroup());
 			CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);

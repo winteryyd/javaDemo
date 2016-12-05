@@ -1,5 +1,7 @@
 package com.deppon.demo.quartz.entity;
 
+import javax.persistence.Id;
+
 public class ScheduleJob {
 	/** 任务id */
 	private String jobId;
@@ -7,30 +9,18 @@ public class ScheduleJob {
 	private String jobName;
 	/** 任务分组 */
 	private String jobGroup;
+	/** 所调类名 */
+	private String classPath;
+	/** 所调方法 */
+	private String method;
 	/** 任务状态 0禁用 1启用 2删除 */
 	private String jobStatus;
 	/** 任务运行时间表达式 */
 	private String cronExpression;
 	/** 任务描述 */
-	private String desc;
-	private String classPath;
-	private String method;
-	public String getClassPath() {
-		return classPath;
-	}
+	private String remark;
 
-	public void setClassPath(String classPath) {
-		this.classPath = classPath;
-	}
-
-	public String getMethod() {
-		return method;
-	}
-
-	public void setMethod(String method) {
-		this.method = method;
-	}
-
+	@Id
 	public String getJobId() {
 		return jobId;
 	}
@@ -55,6 +45,22 @@ public class ScheduleJob {
 		this.jobGroup = jobGroup;
 	}
 
+	public String getClassPath() {
+		return classPath;
+	}
+
+	public void setClassPath(String classPath) {
+		this.classPath = classPath;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
 	public String getJobStatus() {
 		return jobStatus;
 	}
@@ -71,11 +77,12 @@ public class ScheduleJob {
 		this.cronExpression = cronExpression;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
+
 }
