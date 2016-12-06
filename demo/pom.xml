@@ -10,6 +10,7 @@
 		<module>demo-jdbc</module>
 		<module>demo-quartz</module>
     <module>demo-java</module>
+    <module>demo-batch</module>
   </modules>
 	<properties>
 		<java-version>1.7</java-version>

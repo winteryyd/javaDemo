@@ -1,5 +1,7 @@
 package com.deppon.demo.jdbc.dataSource;
 
+import java.sql.SQLException;
+
 import org.apache.commons.dbcp.BasicDataSource;
 
 import javax.sql.DataSource;
@@ -20,5 +22,13 @@ public class DataSourceFactory
     public static DataSource createDataSource()
     {
         return dataSource;
+    }
+    
+    public static void close(){
+    	try {
+			dataSource.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 }
