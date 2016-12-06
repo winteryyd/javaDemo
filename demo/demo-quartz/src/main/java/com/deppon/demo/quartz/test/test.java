@@ -23,6 +23,20 @@ public class test {
 		Session session = new Session();
 		session.biuldConnection();
 		
+		ScheduleJob sJob =new ScheduleJob();
+		sJob.setJobId("1");
+		sJob.setJobName("testJob");
+		sJob.setJobGroup("group");
+		sJob.setClassPath(Job.class.getName());
+		sJob.setMethod("runTest");
+		sJob.setCronExpression("0/5 * * * * ?");
+		sJob.setJobStatus("1");
+		sJob.setRemark("调度测试");
+		
+		session.createTable(sJob.getClass());
+		session.save(sJob);
+		
+		
 		ScheduleJob scheduleJob = session.get(ScheduleJob.class, "1");
 		schedulerFactory.addJob(scheduleJob);
 		schedulerFactory.startSchedule();
