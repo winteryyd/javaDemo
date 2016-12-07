@@ -1,0 +1,21 @@
+package com.deppon.demo.batch.FTD;
+
+import org.springframework.batch.item.file.mapping.FieldSetMapper;
+import org.springframework.batch.item.file.transform.FieldSet;
+import org.springframework.validation.BindException;
+
+/**
+ * 把读取到文件如何映射成为模型，注意read("XXXX")是在lineTokenizer里面设置的
+ */
+
+public class ProductFieldSetMapper implements FieldSetMapper<Product>
+{
+    public Product mapFieldSet(FieldSet fieldSet) throws BindException {
+        Product product = new Product();
+        product.setId( fieldSet.readInt( "id" ) );
+        product.setName( fieldSet.readString( "name" ) );
+        product.setDescription( fieldSet.readString( "description" ) );
+        product.setQuantity( fieldSet.readInt( "quantity" ) );
+        return product;
+    }
+}
