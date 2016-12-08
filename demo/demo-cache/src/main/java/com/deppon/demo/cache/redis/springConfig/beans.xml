@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-autowire="byName">
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="150"></property>
+		<property name="maxIdle" value="32"></property>
+		<property name="minIdle" value="10"></property>
+		<property name="maxWaitMillis" value="15000"></property>
+		
+		<property name="testOnBorrow" value="true"></property>
+		<property name="testOnReturn" value="true"></property>
+		<property name="testWhileIdle" value="true"></property>
+		
+		<property name="softMinEvictableIdleTimeMillis" value="1000"></property>
+		<property name="minEvictableIdleTimeMillis" value="500"></property>
+		<property name="numTestsPerEvictionRun" value="100"></property>
+		<property name="timeBetweenEvictionRunsMillis" value="1000"></property>
+	</bean>
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
+		<!-- config -->
+		<constructor-arg ref="jedisPoolConfig"></constructor-arg>
+		<!-- host -->
+		<constructor-arg value="127.0.0.1"></constructor-arg>
+		<!-- port -->
+		<constructor-arg value="6379"></constructor-arg>
+		<!-- timeout -->
+		<constructor-arg value="15000"></constructor-arg>
+		<!-- password -->
+		<constructor-arg value="admin"></constructor-arg>
+	</bean>
+</beans>

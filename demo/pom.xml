@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.deppon</groupId>
 	<artifactId>demo</artifactId>
@@ -9,9 +10,9 @@
 		<module>demo-transaction</module>
 		<module>demo-jdbc</module>
 		<module>demo-quartz</module>
-    <module>demo-java</module>
-    <module>demo-batch</module>
-    <module>demo-cache</module>
+		<module>demo-java</module>
+		<module>demo-batch</module>
+		<module>demo-cache</module>
 	</modules>
 	<properties>
 		<java-version>1.7</java-version>
@@ -23,7 +24,7 @@
 		<spring-batch.version>3.0.6.RELEASE</spring-batch.version>
 		<mybatis.version>3.3.0</mybatis.version>
 		<quartz.version>2.2.3</quartz.version>
-		<redis-client.version>2.8.0</redis-client.version>
+		<redis-client.version>2.7.3</redis-client.version>
 		<junit.version>4.12</junit.version>
 		<moduleContext>dpap</moduleContext>
 	</properties>
