@@ -1,20 +1,18 @@
 package com.deppon.demo.jdbc;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.deppon.demo.jdbc.session.Session;
 
 public class SessionStudentTest {
 	
-	public Session session;
+	/*public Session session;
 	private Student student; 
 	@Before
 	public void init(){
@@ -61,5 +59,5 @@ public class SessionStudentTest {
 	@After
 	public void close(){
 		session.close();
-	}
+	}*/
 }

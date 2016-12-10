@@ -9,13 +9,6 @@ import javax.sql.DataSource;
 
 import com.deppon.demo.jdbc.connection.SingleThreadConnectionHolder;
 
-/**
- * Created with IntelliJ IDEA.
- * User: davenkin
- * Date: 2/7/13
- * Time: 8:20 PM
- * To change this template use File | Settings | File Templates.
- */
 public class ConnectionHolderInsuranceDao
 {
     private DataSource dataSource;

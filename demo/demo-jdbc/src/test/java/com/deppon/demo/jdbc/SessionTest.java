@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.deppon.demo.jdbc.session.Session;
 
 public class SessionTest {
-	public Session session;
+	/*public Session session;
 	private UserInfo ui; 
 	@Before
 	public void init(){
@@ -22,6 +22,7 @@ public class SessionTest {
 	@Test
 	public void TestSave(){
 		session.createTable(UserInfo.class);
+		
 		ui = new UserInfo();
 		ui.setId(3);
 		ui.setName("小明");
@@ -63,11 +64,6 @@ public class SessionTest {
 		boolean bool = session.delete(ui);
 		System.out.println("TestDelete:"+bool);
 		assertEquals(true, bool);
-	}
+	}*/
 	
-	@After
-	public void close(){
-		session.dropTable(UserInfo.class);
-		session.close();
-	}
 }

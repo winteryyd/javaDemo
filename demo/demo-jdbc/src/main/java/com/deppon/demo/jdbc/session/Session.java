@@ -11,7 +11,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.deppon.demo.jdbc.SessionStudentTest;
 import com.deppon.demo.jdbc.connection.SingleThreadConnectionHolder;
 import com.deppon.demo.jdbc.dataSource.DataSourceFactory;
 import com.deppon.demo.jdbc.entity.ColumnEntity;
