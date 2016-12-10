@@ -10,11 +10,11 @@
 	<packaging>war</packaging>
 
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.deppon</groupId>
 			<artifactId>demo-javaEE</artifactId>
 			<version>${project.parent.version}</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<build>

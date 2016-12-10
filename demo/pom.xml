@@ -10,8 +10,7 @@
 		<module>demo-transaction</module>
 		<module>demo-jdbc</module>
 		<module>demo-quartz</module>
-		<module>demo-javaSE</module>
-		<module>demo-javaEE</module>
+		<module>demo-java</module>
 		<module>demo-batch</module>
 		<module>demo-cache</module>
 		<module>demo-web</module>
