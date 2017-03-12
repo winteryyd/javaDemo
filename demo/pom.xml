@@ -14,7 +14,6 @@
 		<module>demo-batch</module>
 		<module>demo-cache</module>
 		<module>demo-web</module>
-		<module>demo-server</module>
 	</modules>
 	<properties>
 		<java-version>1.7</java-version>
