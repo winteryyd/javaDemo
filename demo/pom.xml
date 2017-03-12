@@ -13,6 +13,7 @@
 		<module>demo-java</module>
 		<module>demo-batch</module>
 		<module>demo-cache</module>
+		<module>demo-server</module>
 		<module>demo-web</module>
 	</modules>
 	<properties>
