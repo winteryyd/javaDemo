@@ -6,5 +6,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>distribute-multi</module>
+  	<module>distribute-socketIO</module>
   </modules>
 </project>
