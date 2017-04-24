@@ -26,7 +26,7 @@ public class Redis {
         //连接redis服务器，192.168.0.100:6379
         jedis = new Jedis("127.0.0.1", 6379);
         //权限认证
-        jedis.auth("admin");  
+        //jedis.auth("admin");  
     }
     
     /**
