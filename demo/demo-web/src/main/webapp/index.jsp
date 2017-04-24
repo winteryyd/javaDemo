@@ -4,6 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <body>
-部署成功
+部署成功2
 </body>
 </html>
