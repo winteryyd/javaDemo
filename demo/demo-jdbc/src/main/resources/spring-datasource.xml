@@ -20,4 +20,6 @@
 		<property name="username" value="#{jdbc['jdbc.username']}" />
 		<property name="password" value="#{jdbc['jdbc.password']}" />
 	</bean>
+	
+	<bean class="com.deppon.demo.jdbc.util.SpringContextUtil" />
 </beans>
