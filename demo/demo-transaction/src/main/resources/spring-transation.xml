@@ -28,8 +28,6 @@
 	<bean class="com.deppon.demo.transaction.aop.TransationAspect">
 		<property name="transactionManager" ref="transactionManager" />
 	</bean>
-	
-	<bean id="springContextUtil" class="com.deppon.demo.jdbc.util.SpringContextUtil" />
 
 	<bean id="annotationBankService" class="com.deppon.demo.transaction.level4_annotation.AnnotationBankService" />
 
