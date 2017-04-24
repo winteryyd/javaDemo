@@ -35,4 +35,7 @@ public class ConnectionHolderBankService implements BankService
             transactionManager.close();
         }
     }
+
+	public void init(DataSource dataSource) {
+	}
 }

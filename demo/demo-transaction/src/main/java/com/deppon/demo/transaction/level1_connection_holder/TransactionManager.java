@@ -11,7 +11,19 @@ public class TransactionManager
 {
     private DataSource dataSource;
 
-    public TransactionManager(DataSource dataSource)
+    public DataSource getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	public TransactionManager(){
+		
+	}
+	
+	public TransactionManager(DataSource dataSource)
     {
         this.dataSource = dataSource;
     }
@@ -20,7 +32,7 @@ public class TransactionManager
     {
         Connection connection = getConnection();
         connection.setAutoCommit(false);
-        System.out.println("事务开启。。。");
+        System.out.println("事务开启。。。"+connection.getAutoCommit());
     }
 
     public final void commit() throws SQLException

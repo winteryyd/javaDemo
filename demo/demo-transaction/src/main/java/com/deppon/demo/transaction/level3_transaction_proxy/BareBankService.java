@@ -28,4 +28,7 @@ public class BareBankService implements BankService
             throw new RuntimeException();
         }
     }
+
+	public void init(DataSource dataSource) {
+	}
 }

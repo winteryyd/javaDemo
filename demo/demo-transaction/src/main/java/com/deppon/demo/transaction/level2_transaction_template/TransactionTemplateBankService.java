@@ -32,4 +32,7 @@ public class TransactionTemplateBankService implements BankService
             }
         }.doJobInTransaction();
     }
+
+	public void init(DataSource dataSource) {
+	}
 }
