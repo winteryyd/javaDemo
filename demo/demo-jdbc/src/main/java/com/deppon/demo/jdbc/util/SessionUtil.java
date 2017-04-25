@@ -235,14 +235,20 @@ public class SessionUtil {
 		return t;
 	}
 
+	/**
+	 * 获取类的属性和所有父类的属性数组
+	 * @param clazz
+	 * @return
+	 */
 	public static Field[] getFields(Class<?> clazz) {
 		List<Field> fields = new ArrayList<Field>();
 		Set<String> set = new HashSet<>();
 		for (; clazz != Object.class; clazz = clazz.getSuperclass()) {
 			Field[] flds = clazz.getDeclaredFields();
-			int i=0;
+			int i = 0;
 			for (Field field : flds) {// 获取bean的属性和值
-				if (!set.contains(field.getName())&&!field.getName().equals("serialVersionUID")) {
+				if (!set.contains(field.getName())
+						&& !field.getName().equals("serialVersionUID")) {
 					set.add(field.getName());
 					fields.add(i, field);
 					i++;

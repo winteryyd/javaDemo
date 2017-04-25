@@ -26,23 +26,12 @@ public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>>
 	}
 
 	/**
-	 * 获取单条数据
-	 * 
-	 * @param entity
-	 * @return
-	 */
-	public T get(T entity) {
-		return dao.get(entity);
-	}
-
-	/**
 	 * 保存数据
 	 * 
 	 * @param entity
 	 */
 	public boolean insert(T entity) {
-		dao.insert(entity);
-		return true;
+		return dao.insert(entity);
 	}
 	
 	/**
@@ -51,18 +40,7 @@ public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>>
 	 * @return
 	 */
 	public boolean update(T entity){
-		dao.update(entity);
-		return true;
-	}
-	
-	/**
-	 * 删除数据（物理删除，从数据库中彻底删除）
-	 * @param id
-	 * @return
-	 */
-	public boolean delete(String id){
-		dao.delete(id);
-		return true;
+		return dao.update(entity);
 	}
 	
 	/**
@@ -71,7 +49,6 @@ public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>>
 	 * @return
 	 */
 	public boolean delete(T entity){
-		dao.delete(entity);
-		return true;
+		return dao.delete(entity);
 	}
 }

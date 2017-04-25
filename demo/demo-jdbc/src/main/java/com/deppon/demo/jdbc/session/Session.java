@@ -134,6 +134,7 @@ public class Session {
 		}
 		return execute(sql);
 	}
+	
 	/**
 	 * 根据Id返回实体
 	 * @param entityClass
