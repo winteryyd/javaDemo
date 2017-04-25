@@ -1,8 +1,11 @@
 package com.deppon.demo.shared.entity;
 
+import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.TreeMap;
 
 import com.deppon.demo.jdbc.persistence.entity.BaseEntity;
+import com.deppon.demo.jdbc.util.SessionUtil;
 
 public class TestEntity extends BaseEntity<TestEntity>{
 	private static final long serialVersionUID = 1L;
@@ -33,4 +36,13 @@ public class TestEntity extends BaseEntity<TestEntity>{
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
+	
+	public static void main(String[] args) {
+            Field[] fields = SessionUtil.getFields(TestEntity.class);
+            for (Field field : fields) {// 获取bean的属性和值
+            	//field.setAccessible(true);
+                System.out.println(field.getName());
+            }
+	}
+	
 }

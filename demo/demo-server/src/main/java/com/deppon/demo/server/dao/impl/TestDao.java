@@ -9,4 +9,10 @@ import com.deppon.demo.shared.entity.TestEntity;
 @Repository
 public class TestDao extends CrudDao<TestEntity> implements ITestDao {
 
+	public void initTable(TestEntity entity) {
+		System.out.println(session);
+		session.dropTable(entity.getClass());
+		session.createTable(entity.getClass());
+	}
+
 }

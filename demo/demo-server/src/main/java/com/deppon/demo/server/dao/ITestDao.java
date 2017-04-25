@@ -4,5 +4,5 @@ import com.deppon.demo.jdbc.persistence.dao.ICrudDao;
 import com.deppon.demo.shared.entity.TestEntity;
 
 public interface ITestDao extends ICrudDao<TestEntity> {
-	
+	public void initTable(TestEntity entity);
 }

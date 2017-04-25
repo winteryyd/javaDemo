@@ -11,7 +11,7 @@ import com.deppon.demo.shared.entity.TestEntity;
 public class TestService extends CrudService<TestDao,TestEntity> implements ITestService{
 
 	public void test() {
-		
+		dao.initTable(new TestEntity());
 	}
 
 }
