@@ -9,14 +9,10 @@ public class CrudDao<T> implements ICrudDao<T> {
 
 	@Autowired
 	public Session session;
-
-	private T entity;
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public T get(String id) {
-		// TODO Auto-generated method stub
-		return (T) session.get(entity.getClass(), id);
+	public T get(Class<T> entityClass,String id) {
+		return (T) session.get(entityClass, id);
 	}
 	
 	@Override

@@ -15,7 +15,7 @@ public interface ICrudDao<T> extends IBaseDao , InitializingBean, DisposableBean
 	 * @param id
 	 * @return
 	 */
-	public T get(String id);
+	public T get(Class<T> entityClass,String id);
 	
 	/**
 	 * 插入数据

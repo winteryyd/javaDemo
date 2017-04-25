@@ -21,8 +21,8 @@ public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>>
 	 * @param id
 	 * @return
 	 */
-	public T get(String id) {
-		return dao.get(id);
+	public T get(Class<T> entityClass,String id) {
+		return dao.get(entityClass, id);
 	}
 
 	/**
