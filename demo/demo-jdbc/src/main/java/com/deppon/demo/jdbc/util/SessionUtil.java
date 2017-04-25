@@ -84,7 +84,7 @@ public class SessionUtil {
 		List<ColumnEntity> columnEntitys = new ArrayList<ColumnEntity>();
 		Class<?> entityClass = entity.getClass();
 		t.setTableName(getTableName(entityClass));
-		Field[] fields = entityClass.getDeclaredFields();
+		Field[] fields = getFields(entityClass);
 		String primaryKeyColumn = "";
 		for (Field field : fields) {
 			if (field.getName().equals("serialVersionUID"))
@@ -168,7 +168,7 @@ public class SessionUtil {
 		TableEntity t = new TableEntity();
 		List<ColumnEntity> columnEntitys = new ArrayList<ColumnEntity>();
 		t.setTableName(getTableName(entityClass));
-		Field[] fields = entityClass.getDeclaredFields();
+		Field[] fields = getFields(entityClass);
 		String primaryKeyColumn = "";
 		for (Field field : fields) {
 			if (field.getName().equals("serialVersionUID"))
