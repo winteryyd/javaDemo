@@ -25,6 +25,13 @@ public class TestController {
 		entity.setBirth(new Date());
 		entity.setAddr("上海");
 		testService.insert(entity);
+		testService.delete(entity);
+		entity.setId("222");
+		testService.insert(entity);
+		
+		TestEntity et = testService.get(TestEntity.class,"222");
+		et.setName("youdianlei");
+		testService.update(et);
 		return "index";
 	}
 }
