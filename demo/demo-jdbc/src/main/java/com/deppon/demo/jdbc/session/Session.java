@@ -10,13 +10,14 @@ import javax.sql.DataSource;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.deppon.demo.jdbc.connection.SingleThreadConnectionHolder;
 import com.deppon.demo.jdbc.dataSource.DataSourceFactory;
 import com.deppon.demo.jdbc.entity.ColumnEntity;
 import com.deppon.demo.jdbc.entity.TableEntity;
 import com.deppon.demo.jdbc.util.SessionUtil;
-
+@Component
 public class Session {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Session.class);

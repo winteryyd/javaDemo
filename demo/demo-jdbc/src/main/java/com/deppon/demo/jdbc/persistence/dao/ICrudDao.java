@@ -1,11 +1,14 @@
 package com.deppon.demo.jdbc.persistence.dao;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
 
 /**
  * DAO支持类实现
  * @param <T>
  */
-public interface ICrudDao<T> extends IBaseDao {
+public interface ICrudDao<T> extends IBaseDao , InitializingBean, DisposableBean {
 
 	/**
 	 * 获取单条数据
@@ -27,28 +30,28 @@ public interface ICrudDao<T> extends IBaseDao {
 	 * @param entity
 	 * @return
 	 */
-	public int insert(T entity);
+	public boolean insert(T entity);
 	
 	/**
 	 * 更新数据
 	 * @param entity
 	 * @return
 	 */
-	public int update(T entity);
+	public boolean update(T entity);
 	
 	/**
 	 * 删除数据（物理删除，从数据库中彻底删除）
 	 * @param id
 	 * @return
 	 */
-	public int delete(String id);
+	public boolean delete(String id);
 	
 	/**
 	 * 删除数据（物理删除，从数据库中彻底删除）
 	 * @param entity
 	 * @return
 	 */
-	public int delete(T entity);
+	public boolean delete(T entity);
 	
 	
 }

@@ -4,7 +4,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -85,6 +87,8 @@ public class SessionUtil {
 		Field[] fields = entityClass.getDeclaredFields();
 		String primaryKeyColumn = "";
 		for (Field field : fields) {
+			if (field.getName().equals("serialVersionUID"))
+				continue;
 			ColumnEntity columnEntity = new ColumnEntity();
 			columnEntity.setProperty(field.getName());
 			columnEntity.setColumnName(field.getName());
@@ -167,6 +171,8 @@ public class SessionUtil {
 		Field[] fields = entityClass.getDeclaredFields();
 		String primaryKeyColumn = "";
 		for (Field field : fields) {
+			if (field.getName().equals("serialVersionUID"))
+				continue;
 			ColumnEntity columnEntity = new ColumnEntity();
 			columnEntity.setProperty(field.getName());
 			columnEntity.setColumnName(field.getName());
@@ -227,5 +233,22 @@ public class SessionUtil {
 		t.setPrimarykey(primaryKeyColumn);
 		t.setColumnEntitys(columnEntitys);
 		return t;
+	}
+
+	public static Field[] getFields(Class<?> clazz) {
+		List<Field> fields = new ArrayList<Field>();
+		Set<String> set = new HashSet<>();
+		for (; clazz != Object.class; clazz = clazz.getSuperclass()) {
+			Field[] flds = clazz.getDeclaredFields();
+			int i=0;
+			for (Field field : flds) {// 获取bean的属性和值
+				if (!set.contains(field.getName())&&!field.getName().equals("serialVersionUID")) {
+					set.add(field.getName());
+					fields.add(i, field);
+					i++;
+				}
+			}
+		}
+		return (Field[]) fields.toArray(new Field[fields.size()]);
 	}
 }

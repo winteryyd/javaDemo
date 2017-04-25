@@ -1,9 +1,15 @@
 package com.deppon.demo.jdbc.persistence.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.deppon.demo.jdbc.persistence.dao.ICrudDao;
+import com.deppon.demo.jdbc.session.Session;
 
 public class CrudDao<T> implements ICrudDao<T>{
 
+	@Autowired
+	public Session session;
+	
 	@Override
 	public T get(String id) {
 		// TODO Auto-generated method stub
@@ -18,27 +24,48 @@ public class CrudDao<T> implements ICrudDao<T>{
 	}
 
 	@Override
-	public int insert(T entity) {
+	public boolean insert(T entity) {
 		// TODO Auto-generated method stub
-		return 0;
+		return session.save(entity);
 	}
 
 	@Override
-	public int update(T entity) {
+	public boolean update(T entity) {
 		// TODO Auto-generated method stub
-		return 0;
+		return true;
 	}
 
 	@Override
-	public int delete(String id) {
+	public boolean delete(String id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return true;
 	}
 
 	@Override
-	public int delete(T entity) {
+	public boolean delete(T entity) {
 		// TODO Auto-generated method stub
-		return 0;
+		return true;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("CrudDao init");
+		if(session==null){
+			session=new Session();
+			session.biuldConnection();
+			System.out.println("CrudDao init success！");
+		}else{
+			session.biuldConnection();
+			System.out.println("CrudDao init success！");
+		}
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		System.out.println("CrudDao destroy");
+		if(session!=null){
+			session.close();
+		}
 	}
 
 }
