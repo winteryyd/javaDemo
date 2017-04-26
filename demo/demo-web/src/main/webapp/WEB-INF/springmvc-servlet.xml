@@ -19,6 +19,16 @@
 	<mvc:annotation-driven />
 
 	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"
+		p:ignoreDefaultModelOnRedirect="true">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/webpages/" />
 		<property name="suffix" value=".jsp" />
