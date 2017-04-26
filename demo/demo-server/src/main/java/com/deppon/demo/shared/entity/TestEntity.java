@@ -2,9 +2,7 @@ package com.deppon.demo.shared.entity;
 
 import java.lang.reflect.Field;
 import java.util.Date;
-import java.util.TreeMap;
 
-import com.deppon.demo.jdbc.persistence.entity.BaseEntity;
 import com.deppon.demo.jdbc.util.SessionUtil;
 
 public class TestEntity extends BaseEntity<TestEntity>{
