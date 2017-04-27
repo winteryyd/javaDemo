@@ -17,7 +17,7 @@ public class RedisStringCacheTest {
 		redisStringCache = new RedisStringCache();
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-redis.xml");
 		RedisTemplate<String, Object> redisTemplate = (RedisTemplate<String, Object>)context.getBean("jedisTemplate");
-		redisStringCache.setRedisTemplate(redisTemplate);
+		redisStringCache.setJedisTemplate(redisTemplate);
 	}
 	
 	@Test

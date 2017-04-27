@@ -4,8 +4,15 @@ import java.lang.reflect.Method;
 
 import org.aspectj.lang.JoinPoint;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 public class AopUtils {
+	private static final String NAMESPACE_SPLIT = "_";
+    private static final String KEY_SPLIT = ":";
+	
+	
     /**
      * Get the intercept method object.
      * <p/>
@@ -42,5 +49,42 @@ public class AopUtils {
             return null;
         LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
         return u.getParameterNames(method);
+    }
+    
+    /**
+     * Parse key and build a redis key with namespace.
+     * The key's definition is support the SpEL Expression
+     */
+    public static String parseKey(String namespace, String[] fieldsKey, Method method, Object[] args) {
+        StringBuilder sb = new StringBuilder();
+        /**
+         * Get method parameters using the spring support library.
+         */
+        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+        String[] paramNameArray = u.getParameterNames(method);
+        /**
+         * Put all the parameters into SpEL context and analysis key using SpEL
+         */
+        ExpressionParser parser = new SpelExpressionParser();
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        for (int i = 0; i < paramNameArray.length; i++) {
+        	//System.out.println(paramNameArray[i]+"   -   "+args[i]);
+            context.setVariable(paramNameArray[i], args[i]);
+        }
+
+        sb.append(namespace).append(NAMESPACE_SPLIT);
+        for (String key : fieldsKey) {
+        	//System.out.println(key);
+            Object value = parser.parseExpression(key).getValue(context, Object.class);
+            //System.out.println(value);
+            sb.append(value).append(KEY_SPLIT);
+        }
+        String fullKey = sb.toString();
+        System.out.println(fullKey);
+        int index;
+        if (fullKey.length() > 0 && (index = fullKey.lastIndexOf(":")) > 0) {
+            fullKey = fullKey.substring(0, index);
+        }
+        return fullKey;
     }
 }
