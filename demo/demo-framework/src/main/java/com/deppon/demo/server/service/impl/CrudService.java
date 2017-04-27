@@ -2,11 +2,11 @@ package com.deppon.demo.server.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.deppon.demo.cache.annotation.CacheUpdate;
 import com.deppon.demo.cache.annotation.Cacheable;
 import com.deppon.demo.server.dao.impl.CrudDao;
 import com.deppon.demo.server.service.ICrudService;
 import com.deppon.demo.shared.entity.BaseEntity;
-import com.deppon.demo.transaction.level4_annotation.Transactional;
 
 public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>>
 		extends BaseService implements ICrudService<D, T> {
@@ -14,7 +14,7 @@ public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>>
 	 * 持久层对象
 	 */
 	@Autowired
-	protected D dao;
+	public D dao;
 
 	/**
 	 * 获取单条数据
@@ -22,7 +22,6 @@ public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>>
 	 * @param id
 	 * @return
 	 */
-	@Cacheable(fieldsKey = { "#id" })
 	public T get(Class<T> entityClass,String id) {
 		return dao.get(entityClass, id);
 	}
