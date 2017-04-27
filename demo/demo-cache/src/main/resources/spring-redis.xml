@@ -11,7 +11,7 @@
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 	<!-- 加载配置属性文件 -->
-	<util:properties id="redis" location="spring-redis-config.properties" />
+	<util:properties id="redis" location="classpath*:spring-redis-config.properties" />
 	
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxTotal" value="#{redis['redis.pool.maxTotal']}"></property>
