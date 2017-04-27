@@ -2,6 +2,7 @@ package com.deppon.demo.server.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
+import com.deppon.demo.cache.annotation.Cacheable;
 import com.deppon.demo.server.dao.ITestDao;
 import com.deppon.demo.shared.entity.TestEntity;
 
@@ -14,5 +15,5 @@ public class TestDao extends CrudDao<TestEntity> implements ITestDao {
 		session.dropTable(entity.getClass());
 		session.createTable(entity.getClass());
 	}
-
+	
 }

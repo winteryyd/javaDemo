@@ -1,6 +1,7 @@
 package com.deppon.demo.server.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,14 @@ public class TestController {
 	public List<TestEntity> listData() {
 		List<TestEntity> list = new ArrayList<TestEntity>();
 		
-		for(int i=1;i<100;i++){
+		/*for(int i=1;i<100;i++){
 			list.add(testService.get(TestEntity.class, i+""));
-		}
+		}*/
+		TestEntity entity = testService.get(TestEntity.class, "1");
+		list.add(entity);
+		entity.setBirth(new Date());
 		
+		testService.update(entity);
 		return list;
 	}
 	
