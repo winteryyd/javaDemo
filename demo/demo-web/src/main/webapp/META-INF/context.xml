@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Context>
 
-    <Resource name="jdbc/oracle_db"
+<!--     <Resource name="jdbc/oracle_db"
               auth="Container"
               type="javax.sql.DataSource"
               username="ibmtest"
@@ -19,5 +19,5 @@
               driverClassName="oracle.jdbc.driver.OracleDriver"
               url="jdbc:oracle:thin:@192.168.218.91:1521:odsdb"
               maxActive="10"
-              maxIdle="2"/>
+              maxIdle="2"/> -->
 </Context>
