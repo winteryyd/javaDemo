@@ -6,15 +6,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * Created by yamorn on 2015/11/23.
- *
- * Cache synchronized
- */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface CacheUpdate {
+public @interface CacheSave {
     /*
     A Logical partition namespace of cache.
  */

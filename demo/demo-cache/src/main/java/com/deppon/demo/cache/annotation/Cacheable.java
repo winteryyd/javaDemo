@@ -9,12 +9,6 @@ import java.lang.annotation.Target;
 
 import com.deppon.demo.cache.handler.DynamicExpireHandler;
 
-/**
- * Created by yamorn on 2015/11/10.
- * <p/>
- * This annotation used on methods which would be intercepted by spring AOP.
- * Then build keys and storage in a cache which is usually a redis.
- */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
