@@ -28,17 +28,17 @@ public @interface CacheUpdate {
     /*
         The update entity of field
      */
-    String valueField() default "";
+    //String valueField() default "";
 
     /*
         The value of update entity
      */
-    Class valueType();
+    //Class valueType();
 
     /**
      *  If use this method, AOP will update fieldsKey with return value. Ignore valueField() and valueField()
      */
-    boolean updateRetVal() default false;
+    //boolean updateRetVal() default false;
 
     /*
         expire time. Units are seconds.

@@ -29,12 +29,17 @@ public class AopUtils {
 
         Method method = null;
         try {
+        	/*Signature s = pjp.getSignature();
+        	String name = s.getName();
+        	Object o = pjp.getTarget();
+        	Class c = o.getClass();
+        	method = c.getMethod(name, argTypes);*/
             method = pjp.getTarget().getClass().getMethod(pjp.getSignature().getName(), argTypes);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
         } catch (SecurityException e) {
             e.printStackTrace();
-        }
+        } catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
         return method;
     }
 
@@ -80,7 +85,7 @@ public class AopUtils {
             sb.append(value).append(KEY_SPLIT);
         }
         String fullKey = sb.toString();
-        System.out.println(fullKey);
+        //System.out.println(fullKey);
         int index;
         if (fullKey.length() > 0 && (index = fullKey.lastIndexOf(":")) > 0) {
             fullKey = fullKey.substring(0, index);

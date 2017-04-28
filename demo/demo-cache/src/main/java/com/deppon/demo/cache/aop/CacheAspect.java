@@ -1,24 +1,17 @@
 package com.deppon.demo.cache.aop;
 
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
-import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 
 import com.deppon.demo.cache.annotation.Cacheable;
-import com.deppon.demo.cache.exception.DynamicExpireSettingException;
 import com.deppon.demo.cache.handler.DynamicExpireHandler;
 import com.deppon.demo.cache.redis.RedisStringCache;
 import com.deppon.demo.cache.util.AopUtils;
@@ -32,6 +25,7 @@ import com.deppon.demo.cache.util.AopUtils;
 @Aspect
 @Component
 public class CacheAspect {
+	private static final Logger logger = LoggerFactory.getLogger(CacheAspect.class);
     @Autowired
     private RedisStringCache redisStringCache;
 
@@ -59,6 +53,9 @@ public class CacheAspect {
         Class<? extends DynamicExpireHandler>[] handlers = cacheable.dynamicExpireHandler();
 
         retObj = redisStringCache.get(cacheKey);
+        logger.info("搜索缓存。。。");
+        logger.info("key: "+cacheKey);
+		logger.info("val: "+retObj);
         if (retObj == null) {
         	try {
         		retObj = pjp.proceed();
@@ -96,11 +93,11 @@ public class CacheAspect {
      * @param expireFieldName
      * @param expireFieldFormat
      */
-    private void handlerCacheSet(String expireFieldName,String expireFieldFormat){
+    /*private void handlerCacheSet(String expireFieldName,String expireFieldFormat){
         if (org.springframework.util.StringUtils.isEmpty(expireFieldName) || org.springframework.util.StringUtils.isEmpty(expireFieldFormat)) {
             throw new DynamicExpireSettingException();
         }
-    }
+    }*/
     /**
      * Get arg value
      *
@@ -111,22 +108,22 @@ public class CacheAspect {
      * @param <T>       return type
      * @return value
      */
-    private <T> T getArgValue(String fieldName, Class<T> argType, Method method, Object[] args) {
-        /**
+    /*private <T> T getArgValue(String fieldName, Class<T> argType, Method method, Object[] args) {
+        *//**
          * Get method parameters using the spring support library.
-         */
+         *//*
         LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
         String[] paramNameArray = u.getParameterNames(method);
-        /**
+        *//**
          * Put all the parameters into SpEL context and analysis key using SpEL
-         */
+         *//*
         ExpressionParser parser = new SpelExpressionParser();
         StandardEvaluationContext context = new StandardEvaluationContext();
         for (int i = 0; i < paramNameArray.length; i++) {
             context.setVariable(paramNameArray[i], args[i]);
         }
         return parser.parseExpression(fieldName).getValue(context, argType);
-    }
+    }*/
     
     
 }
