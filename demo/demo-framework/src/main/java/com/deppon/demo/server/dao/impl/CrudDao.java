@@ -3,12 +3,10 @@ package com.deppon.demo.server.dao.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import com.deppon.demo.cache.annotation.CacheDelete;
 import com.deppon.demo.cache.annotation.CacheSave;
 import com.deppon.demo.cache.annotation.Cacheable;
-import com.deppon.demo.cache.aop.CacheSaveAspect;
 import com.deppon.demo.jdbc.session.Session;
 import com.deppon.demo.server.dao.ICrudDao;
 
