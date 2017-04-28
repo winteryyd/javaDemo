@@ -2,7 +2,7 @@ package com.deppon.demo.server.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.deppon.demo.cache.annotation.CacheUpdate;
+import com.deppon.demo.cache.annotation.CacheSave;
 import com.deppon.demo.cache.annotation.Cacheable;
 import com.deppon.demo.server.dao.impl.CrudDao;
 import com.deppon.demo.server.service.ICrudService;
