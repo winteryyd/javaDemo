@@ -125,7 +125,10 @@ public class TableEntity {
 		Object id = null;
 		for (int i=0;i<columnEntitys.size();i++) {
 			ColumnEntity columnEntity = columnEntitys.get(i);
-			
+			if(primarykey.equals(columnEntity.getColumnName())){
+				id = columnEntity.getValue();
+				continue;
+			}
 			updateSql.append("  "+columnEntity.getColumnName()+"=");
 			if(columnEntity.getValue() instanceof Date){
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -135,9 +138,6 @@ public class TableEntity {
 			}
 			if (i != columnEntitys.size() - 1) {
 				updateSql.append(",\n");
-			}
-			if(primarykey.equals(columnEntity.getColumnName())){
-				id = columnEntity.getValue();
 			}
 		}
 		if(id==null)

@@ -50,7 +50,7 @@ public class Session {
 			prep = conn.prepareStatement(sql);
 			if(null==prep)
 				return false;
-			return prep.execute();
+			return !prep.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -132,7 +132,7 @@ public class Session {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return execute(sql);
+		return executeUpdate(sql);
 	}
 	
 	/**
@@ -152,7 +152,10 @@ public class Session {
 			sql = sql+id;
 			logger.info(sql);
 			ResultSet result = executeQuery(sql);
-			result.next();
+			//判断是否存在结果,不存在返回null
+			if(!result.next()){
+				return null;
+			}
 			// 把数据组拼到对象中去
 			T entity = entityClass.newInstance();
 			
