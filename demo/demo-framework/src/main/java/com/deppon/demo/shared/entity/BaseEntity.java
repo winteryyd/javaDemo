@@ -2,7 +2,7 @@ package com.deppon.demo.shared.entity;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 /**
  * Entity支持类
