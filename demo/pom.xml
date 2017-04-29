@@ -8,9 +8,9 @@
 	<modules>
 		<module>demo-transaction</module>
 		<module>demo-jdbc</module>
-		<module>demo-quartz</module>
+		<!-- <module>demo-quartz</module>
 		<module>demo-java</module>
-		<module>demo-batch</module>
+		<module>demo-batch</module> -->
 		<module>demo-cache</module>
 		<module>demo-server</module>
 		<module>demo-web</module>
@@ -189,11 +189,12 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
 			<version>2.4</version>
-		</dependency>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
