@@ -25,7 +25,7 @@ public class TestController {
 	@RequestMapping("/index")
 	public String index(){
 		testService.test();
-		for(int i=1;i<10000;i++){
+		for(int i=1;i<1000;i++){
 			TestEntity entity = new TestEntity();
 			entity.setId(i+"");
 			entity.setName("name"+i);
