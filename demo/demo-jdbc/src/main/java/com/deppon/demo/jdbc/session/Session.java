@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -134,7 +136,38 @@ public class Session {
 		}
 		return executeUpdate(sql);
 	}
-	
+	/**
+	 * 根据实体返回全部数据
+	 * @param entityClass
+	 * @return
+	 */
+	public <T> List<T> getAll(Class<T> entityClass){
+		List<T> list = new ArrayList<T>();
+		String sql = null;
+		TableEntity tableEntity = null;
+		try {
+			tableEntity = SessionUtil.getTableEntity(entityClass);
+			if(tableEntity.getTableName()==null)
+				return null;
+			sql = "select * from "+tableEntity.getTableName();
+			logger.info(sql);
+			ResultSet result = executeQuery(sql);
+			//判断是否存在结果,不存在返回null
+			while(result.next()){
+				// 把数据组拼到对象中去
+				T entity = entityClass.newInstance();
+				for(int i=0;i<tableEntity.getColumnEntitys().size();i++){
+					ColumnEntity columnEntity = tableEntity.getColumnEntitys().get(i);
+					Object value = result.getObject(columnEntity.getColumnName());
+					BeanUtils.setProperty(entity, columnEntity.getProperty(), value);
+				}
+				list.add(entity);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	/**
 	 * 根据Id返回实体
 	 * @param entityClass
