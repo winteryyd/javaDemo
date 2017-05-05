@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 
 import com.deppon.demo.batch.AbstractBatchExecutor;
 
-@Service
+//@Service
 public class helloworld extends AbstractBatchExecutor {
 
-	@Resource(name = "helloWorldJob")
+	//@Resource(name = "helloWorldJob")
 	private Job job;
 
 	@Autowired
@@ -31,13 +31,11 @@ public class helloworld extends AbstractBatchExecutor {
 
 	@Override
 	protected Job getJob() {
-		// TODO Auto-generated method stub
 		return job;
 	}
 
 	@Override
 	protected JobLauncher getJobLauncher() {
-		// TODO Auto-generated method stub
 		return jobLauncher;
 	}
 
@@ -51,7 +49,6 @@ public class helloworld extends AbstractBatchExecutor {
 
 	@Override
 	protected JobExplorer getJobExplorer() {
-		// TODO Auto-generated method stub
 		return jobExplorer;
 	}
 
