@@ -43,12 +43,12 @@ public class MyApplicationListener implements ApplicationListener<ContextRefresh
 			//logger.info("{}",context.containsBean("cacheAspect"));
 			
 		}else{
-			logger.info("root application context 没有parent，他就是老大.");
+			/*logger.info("root application context 没有parent，他就是老大.");
 			ApplicationContext context= event.getApplicationContext();
 			logger.info("{}",context.getBeanDefinitionCount());
 			for(String str:context.getBeanDefinitionNames()){
 				logger.info("{}",str);
-			}
+			}*/
 			//logger.info("son contain cacheAspect {}",context.containsBean("cacheAspect"));
 		}
 	}

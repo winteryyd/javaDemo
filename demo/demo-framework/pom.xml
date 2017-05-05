@@ -19,9 +19,14 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.deppon</groupId>
-			<artifactId>demo-transaction</artifactId>
+			<artifactId>demo-jdbc</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		<!-- <dependency>
+			<groupId>com.deppon</groupId>
+			<artifactId>demo-transaction</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
