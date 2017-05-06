@@ -88,16 +88,15 @@ public class Session implements InitializingBean,DisposableBean{
 	 * @param sql
 	 * @return
 	 */
-	public boolean executeUpdate(String sql){
+	public int executeUpdate(String sql){
 		PreparedStatement prep = null;
 		try {
 			prep = conn.prepareStatement(sql);
-			if (prep.executeUpdate() > 0)
-				return true;
+				return prep.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return -1;
 	}
 	/**
 	 * 根据entity删除表
@@ -132,13 +131,13 @@ public class Session implements InitializingBean,DisposableBean{
 	 * @param entity
 	 * @return
 	 */
-	public boolean save(Object entity){
+	public int save(Object entity){
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getInsertSql();
 			logger.info(sql);
 			if(null==sql)
-				return false;
+				return -1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -217,13 +216,13 @@ public class Session implements InitializingBean,DisposableBean{
 	 * @param entity
 	 * @return
 	 */
-	public boolean update(Object entity){
+	public int update(Object entity){
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getUpdateSql();
 			logger.info(sql);
 			if(null==sql)
-				return false;
+				return -1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -234,13 +233,13 @@ public class Session implements InitializingBean,DisposableBean{
 	 * @param entity
 	 * @return
 	 */
-	public boolean delete(Object entity){
+	public int delete(Object entity){
 		String sql = null;
 		try {
 			sql = SessionUtil.getTableEntity(entity).getDeleteSql();
 			logger.info(sql);
 			if(null==sql)
-				return false;
+				return -1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
