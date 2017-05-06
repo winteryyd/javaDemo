@@ -12,29 +12,37 @@ import javax.sql.DataSource;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 
 import com.deppon.demo.jdbc.connection.SingleThreadConnectionHolder;
 import com.deppon.demo.jdbc.dataSource.DataSourceFactory;
 import com.deppon.demo.jdbc.entity.ColumnEntity;
 import com.deppon.demo.jdbc.entity.TableEntity;
 import com.deppon.demo.jdbc.util.SessionUtil;
-@Component
-public class Session {
+
+public class Session implements InitializingBean,DisposableBean{
 	
 	private static final Logger logger = LoggerFactory.getLogger(Session.class);
 	
 	private Connection conn = null;
+	private DataSource dataSource;
 
 	public Session() {
 	}
 
+	public Session(DataSource dataSource) {
+		this.dataSource = dataSource;
+		conn = SingleThreadConnectionHolder.getConnection(dataSource);
+	}
+	
 	public Session(Connection conn) {
 		this.conn = conn;
 	}
 	/**
 	 * 根据配置创建数据库连接
 	 */
+	@Deprecated
 	public void biuldConnection(){
 		if (null == conn) {
 			DataSource ds = DataSourceFactory.createDataSource();
@@ -248,6 +256,33 @@ public class Session {
 			}finally{
 				conn=null;
 			}
+		}
+	}
+
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		// TODO Auto-generated method stub
+		this.close();
+		logger.info("destroy");
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		// TODO Auto-generated method stub
+		if(null==dataSource){
+			logger.error("dataSource is not null!");
+			return;
+		}
+		if (null == conn) {
+			conn = SingleThreadConnectionHolder.getConnection(dataSource);
 		}
 	}
 }

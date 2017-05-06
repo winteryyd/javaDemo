@@ -11,8 +11,8 @@
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 	<!-- 加载配置属性文件 -->
-	<util:properties id="jdbc" location="classpath*:spring-jdbc-config.properties" />
-
+	<!-- <util:properties id="jdbc" location="classpath*:spring-jdbc-config.properties" />
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="#{jdbc['jdbc.driverClassName']}" />
@@ -21,5 +21,25 @@
 		<property name="password" value="#{jdbc['jdbc.password']}" />
 	</bean>
 	
-	<bean class="com.deppon.demo.jdbc.util.SpringContextUtil" />
+	<bean class="com.deppon.demo.jdbc.util.SpringContextUtil" /> -->
+	
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="jdbc/mysql_db"/>
+        <property name="resourceRef" value="true"/>
+    </bean>
+    
+    <!-- <bean id="proxyDataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="dataSource"/>
+    </bean> -->
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <bean id="sqlSession" class="com.deppon.demo.jdbc.session.Session">
+    	<constructor-arg ref="dataSource"/>
+    </bean>
+    
 </beans>
