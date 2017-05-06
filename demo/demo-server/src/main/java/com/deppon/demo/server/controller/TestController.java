@@ -11,13 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.deppon.demo.server.services.ITestService;
-import com.deppon.demo.shared.entity.TestEntity;
+import com.deppon.demo.base.entity.TestEntity;
+import com.deppon.demo.framework.server.service.ITestService;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 	@Autowired
 	private ITestService testService;
 	
