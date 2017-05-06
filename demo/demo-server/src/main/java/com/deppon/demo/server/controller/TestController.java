@@ -11,21 +11,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.deppon.demo.server.dao.impl.CrudDao;
 import com.deppon.demo.server.services.ITestService;
 import com.deppon.demo.shared.entity.TestEntity;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
-	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private ITestService testService;
 	
 	@RequestMapping("/index")
 	public String index(){
 		testService.test();
-		for(int i=1;i<1000;i++){
+		for(int i=1;i<100;i++){
 			TestEntity entity = new TestEntity();
 			entity.setId(i+"");
 			entity.setName("name"+i);

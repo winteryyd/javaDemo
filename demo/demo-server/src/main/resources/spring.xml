@@ -19,7 +19,6 @@
 
 	<context:annotation-config />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-
 	
 	<import resource="classpath:spring-redis.xml" />
 	<import resource="classpath:spring-datasource.xml" />

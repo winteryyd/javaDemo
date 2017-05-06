@@ -3,7 +3,7 @@ package com.deppon.demo.server.services.impl;
 import org.springframework.stereotype.Service;
 
 import com.deppon.demo.server.dao.impl.TestDao;
-import com.deppon.demo.server.service.impl.CrudService;
+import com.deppon.demo.server.service.base.CrudService;
 import com.deppon.demo.server.services.ITestService;
 import com.deppon.demo.shared.entity.TestEntity;
 @Service

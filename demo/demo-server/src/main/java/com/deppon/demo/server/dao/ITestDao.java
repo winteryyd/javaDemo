@@ -1,5 +1,6 @@
 package com.deppon.demo.server.dao;
 
+import com.deppon.demo.server.dao.base.ICrudDao;
 import com.deppon.demo.shared.entity.TestEntity;
 
 public interface ITestDao extends ICrudDao<TestEntity> {
