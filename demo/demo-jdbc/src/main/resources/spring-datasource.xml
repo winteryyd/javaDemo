@@ -41,5 +41,4 @@
     <bean id="sqlSession" class="com.deppon.demo.jdbc.session.Session">
     	<constructor-arg ref="dataSource"/>
     </bean>
-    
 </beans>
