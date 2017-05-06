@@ -1,4 +1,4 @@
-package com.deppon.demo.server.service.base;
+package com.deppon.demo.server.service;
 
 import com.deppon.demo.server.dao.base.ICrudDao;
 import com.deppon.demo.shared.entity.BaseEntity;
