@@ -112,6 +112,16 @@ public class TableEntity {
 		if(null==tableName||"".equals(tableName)||null==primarykey||"".equals(primarykey))
 			return null;
 		StringBuffer insertSql = new StringBuffer("select * from "+tableName+" where "+primarykey+"=");
+		Object id = null;
+		for (int i=0;i<columnEntitys.size();i++) {
+			ColumnEntity columnEntity = columnEntitys.get(i);
+			if(primarykey.equals(columnEntity.getColumnName())){
+				id = columnEntity.getValue();
+			}
+		}
+		if(id!=null){
+			insertSql.append(id);
+		}
 		return insertSql.toString();
 	}
 	/**

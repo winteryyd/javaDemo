@@ -209,7 +209,40 @@ public class Session implements InitializingBean,DisposableBean{
 			e.printStackTrace();
 		}
 		return null;
-		
+	}
+	
+	/**
+	 * 返回实体
+	 * @param entityClass
+	 * @param id
+	 * @return
+	 */
+	public <T> T get(Object entity){
+		String sql = null;
+		TableEntity tableEntity = null;
+		try {
+			tableEntity = SessionUtil.getTableEntity(entity);
+			sql = tableEntity.getSelectSQL();
+			logger.info(sql);
+			ResultSet result = executeQuery(sql);
+			//判断是否存在结果,不存在返回null
+			if(!result.next()){
+				return null;
+			}
+			// 把数据组拼到对象中去
+			@SuppressWarnings("unchecked")
+			T tntity = (T) entity;
+			
+			for(int i=0;i<tableEntity.getColumnEntitys().size();i++){
+				ColumnEntity columnEntity = tableEntity.getColumnEntitys().get(i);
+				Object value = result.getObject(columnEntity.getColumnName());
+				BeanUtils.setProperty(tntity, columnEntity.getProperty(), value);
+			}
+			return tntity;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	/**
 	 * 更新实体数据
