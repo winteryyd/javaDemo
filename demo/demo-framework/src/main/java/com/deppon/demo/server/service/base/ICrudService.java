@@ -1,6 +1,6 @@
-package com.deppon.demo.server.service;
+package com.deppon.demo.server.service.base;
 
-import com.deppon.demo.server.dao.ICrudDao;
+import com.deppon.demo.server.dao.base.ICrudDao;
 import com.deppon.demo.shared.entity.BaseEntity;
 
 public interface ICrudService<D extends ICrudDao<T>,T extends BaseEntity<T>> extends IBaseService{

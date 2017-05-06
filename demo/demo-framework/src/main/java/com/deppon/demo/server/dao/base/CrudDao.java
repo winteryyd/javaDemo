@@ -1,4 +1,4 @@
-package com.deppon.demo.server.dao.impl;
+package com.deppon.demo.server.dao.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,13 +8,12 @@ import com.deppon.demo.cache.annotation.CacheDelete;
 import com.deppon.demo.cache.annotation.CacheSave;
 import com.deppon.demo.cache.annotation.Cacheable;
 import com.deppon.demo.jdbc.session.Session;
-import com.deppon.demo.server.dao.ICrudDao;
 
 public abstract class CrudDao<T> implements ICrudDao<T> {
 	private static final Logger logger = LoggerFactory.getLogger(CrudDao.class);
 
 	@Autowired
-	public Session session;
+	public Session sqlSession;
 
 	@Cacheable(
 			namespace = "demo", 
@@ -22,7 +21,7 @@ public abstract class CrudDao<T> implements ICrudDao<T> {
 			expire = 86400
 			)
 	public T get(Class<T> entityClass, String id) {
-		return (T) session.get(entityClass, id);
+		return (T) sqlSession.get(entityClass, id);
 	}
 
 	@CacheSave(
@@ -32,7 +31,7 @@ public abstract class CrudDao<T> implements ICrudDao<T> {
 			)
 	public boolean insert(T entity) {
 		// TODO Auto-generated method stub
-		return session.save(entity);
+		return sqlSession.save(entity);
 	}
 
 	@CacheSave(
@@ -42,7 +41,7 @@ public abstract class CrudDao<T> implements ICrudDao<T> {
 			)
 	public boolean update(T entity) {
 		// TODO Auto-generated method stub
-		return session.update(entity);
+		return sqlSession.update(entity);
 	}
 
 	@CacheDelete(
@@ -51,24 +50,21 @@ public abstract class CrudDao<T> implements ICrudDao<T> {
 			)
 	public boolean delete(T entity) {
 		// TODO Auto-generated method stub
-		return session.delete(entity);
+		return sqlSession.delete(entity);
 	}
 
 	public void afterPropertiesSet() throws Exception {
-		if (session == null) {
-			session = new Session();
-			session.biuldConnection();
-			logger.info("CrudDao init success！");
+		if (sqlSession == null) {
+			logger.info("sqlSession init failed！");
 		} else {
-			session.biuldConnection();
-			logger.info("CrudDao init success！");
+			logger.info("sqlSession init success！");
 		}
 	}
 
 	public void destroy() throws Exception {
 		logger.info("CrudDao destroy");
-		if (session != null) {
-			session.close();
+		if (sqlSession != null) {
+			sqlSession.close();
 		}
 	}
 
