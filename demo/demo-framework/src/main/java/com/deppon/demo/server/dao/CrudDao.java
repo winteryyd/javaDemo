@@ -1,4 +1,4 @@
-package com.deppon.demo.server.dao.base;
+package com.deppon.demo.server.dao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

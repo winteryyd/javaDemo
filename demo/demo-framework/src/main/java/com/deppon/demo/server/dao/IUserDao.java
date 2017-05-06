@@ -1,4 +1,4 @@
-package com.deppon.demo.server.dao.mybatis;
+package com.deppon.demo.server.dao;
 
 import org.springframework.stereotype.Component;
 

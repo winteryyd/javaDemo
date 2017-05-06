@@ -1,4 +1,4 @@
-package com.deppon.demo.server.dao.base;
+package com.deppon.demo.server.dao;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
