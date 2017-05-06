@@ -13,41 +13,4 @@
 			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
 	<bean class="com.deppon.demo.listener.MyApplicationListener"></bean>
-	<!-- <bean id="configproperties"
-		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="location" value="classpath:spring-config.properties" />
-	</bean> -->
-	
-	<!-- MyBatis begin -->
- <!--    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="com.deppon"/>
-        <property name="typeAliasesSuperType" value="com.deppon.demo.shared.entity.BaseEntity"/>
-        <property name="mapperLocations" value="classpath*:com/deppon/**/ibatis/*.xml"/>
-		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
-    </bean> -->
-    
-    <!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
-    <!-- <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-        <property name="basePackage" value="com.deppon"/>
-        <property name="annotationClass" value="com.deppon.demo.annotation.MyBatisDao"/>
-    </bean> -->
-
-		<!-- 配置ibatis （库） -->
-	<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:sqlMapConfig.xml" />
-		<property name="mapperLocations" value="classpath*:/mapper/*Dao.xml"/>
-	</bean>
-
-	<bean id="SqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		 <constructor-arg index="0" ref="SqlSessionFactory" /> 
-	</bean>
-	
-	<!-- 将所有实现接口dao全部实例化 -->
-		<bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-			<property name="basePackage" value="com.deppon.demo.server.dao.mybatis"></property>
-			<property name="sqlSessionFactory" ref="SqlSessionFactory"></property>
-		</bean>
 </beans>
