@@ -7,7 +7,7 @@
               username="root"
               password="root"
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/javademo"
+              url="jdbc:mysql://localhost:3306/javademo?useUnicode=true&amp;characterEncoding=utf-8"
               maxActive="10"
               maxIdle="2"/>
 
