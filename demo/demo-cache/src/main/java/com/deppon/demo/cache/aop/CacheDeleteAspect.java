@@ -49,7 +49,7 @@ public class CacheDeleteAspect {
 				jp.getArgs());
 
 //		如果方法本身返回为boolean类型，且删除成功，则删除缓存
-		if (rtv instanceof Boolean && "true".equals(rtv.toString())) {
+		if (rtv instanceof Boolean|| rtv instanceof Integer || "true".equals(rtv.toString())|| "1".equals(rtv.toString()) ) {
 			redisStringCache.del(cacheKey);
 			logger.info("删除缓存。。。");
 			logger.info("key: {}",cacheKey);

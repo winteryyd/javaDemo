@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.deppon.demo.base.entity.BaseEntity;
 import com.deppon.demo.cache.annotation.CacheSave;
 import com.deppon.demo.cache.redis.RedisStringCache;
 import com.deppon.demo.cache.util.AopUtils;
@@ -53,11 +54,21 @@ public class CacheSaveAspect {
 			value=jp.getArgs()[0];
 			//logger.info("如果方法本身返回为boolean类型，且修改成功，则缓存参数entity");
 		} 
+		//如果方法本身返回为Integer类型，且修改成功，则缓存参数entity
+		else if (rtv instanceof Integer && "1".equals(rtv.toString())) {
+			value=jp.getArgs()[0];
+			//logger.info("如果方法本身返回为Integer类型，且修改成功，则缓存参数entity");
+		}
 //		如果方法本身返回对象，且返回值不为空，则缓存返回值
+		else if (rtv instanceof BaseEntity) {
+			value = rtv;
+			//logger.info("如果方法本身返回对象，且返回值不为空，则缓存返回值");
+		}
 		else if (rtv != null && !"flase".equals(rtv.toString())) {
 			value = rtv;
 			//logger.info("如果方法本身返回对象，且返回值不为空，则缓存返回值");
 		}
+		
 		
 		if (value == null)
 			return;
