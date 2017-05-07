@@ -12,37 +12,26 @@
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
-	
+
 	<!-- MyBatis begin -->
- <!--    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="com.deppon"/>
-        <property name="typeAliasesSuperType" value="com.deppon.demo.shared.entity.BaseEntity"/>
-        <property name="mapperLocations" value="classpath*:com/deppon/**/ibatis/*.xml"/>
-		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
-    </bean> -->
-    
-    <!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
-    <!-- <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-        <property name="basePackage" value="com.deppon"/>
-        <property name="annotationClass" value="com.deppon.demo.annotation.MyBatisDao"/>
-    </bean> -->
-
-	<!-- 配置ibatis （库） -->
-	<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="typeAliasesPackage" value="com.deppon.demo.base.entity" />
+		<property name="typeAliasesSuperType" value="com.deppon.demo.base.entity.BaseEntity" />
 		<property name="mapperLocations" value="classpath*:/mapper/*Dao.xml" />
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 	</bean>
 
-	<bean id="SqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="SqlSessionFactory" />
+	<!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
+	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<property name="basePackage" value="com.deppon.demo.mybatis.dao" />
+		<property name="annotationClass"
+			value="com.deppon.demo.mybatis.annotition.MyBatisDao" />
 	</bean>
 
-	<!-- 将所有实现接口dao全部实例化 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.deppon.demo.mybatis.dao"></property>
-		<property name="sqlSessionFactory" ref="SqlSessionFactory"></property>
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+
 </beans>
