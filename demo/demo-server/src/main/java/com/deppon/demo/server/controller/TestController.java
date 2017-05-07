@@ -21,6 +21,7 @@ public class TestController {
 	@Autowired
 	private ITestService testService;
 	
+	
 	@RequestMapping("/index")
 	public String index(){
 		testService.test();
@@ -45,7 +46,7 @@ public class TestController {
 		}
 		Date end = new Date();
 		logger.info("{}",end.getTime()-start.getTime());*/
-		TestEntity entity = testService.get(TestEntity.class, "1");
+		TestEntity entity = testService.get(TestEntity.class,"1");
 		list.add(entity);
 		return list;
 	}

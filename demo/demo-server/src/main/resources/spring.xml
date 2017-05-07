@@ -20,9 +20,11 @@
 	<context:annotation-config />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	
+	<import resource="classpath*:spring-mybatis.xml" />
 	<import resource="classpath:spring-redis.xml" />
 	<import resource="classpath:spring-datasource.xml" />
 	<!-- <import resource="classpath:spring-transaction.xml" /> -->
 	<import resource="classpath:spring-framework.xml" />
-	<import resource="classpath:spring-batch.xml" />
+	
+	<!-- <import resource="classpath:spring-batch.xml" /> -->
 </beans>
