@@ -3,6 +3,7 @@ package com.deppon.demo.mybatis.service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.deppon.demo.base.entity.BaseEntity;
+import com.deppon.demo.cache.annotation.Cacheable;
 import com.deppon.demo.framework.dao.ICrudDao;
 import com.deppon.demo.framework.service.ICrudService;
 
@@ -20,6 +21,11 @@ public abstract class CrudService<D extends ICrudDao<T>, T extends BaseEntity<T>
 	 * @param id
 	 * @return
 	 */
+	@Cacheable(
+			namespace = "demo", 
+			fieldsKey = { "#entityClass.name", "#id" }, 
+			expire = 86400
+			)
 	public T get(Class<T> entityClass,String id) {
 		return dao.get(entityClass, id);
 	}
