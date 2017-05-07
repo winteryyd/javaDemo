@@ -23,12 +23,11 @@
 	</bean>
 
 	<!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
-	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<!-- <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 		<property name="basePackage" value="com.deppon.demo.mybatis.dao" />
-		<property name="annotationClass"
-			value="com.deppon.demo.mybatis.annotition.MyBatisDao" />
-	</bean>
+		<property name="annotationClass" value="com.deppon.demo.mybatis.annotition.MyBatisDao" />
+	</bean> -->
 
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />

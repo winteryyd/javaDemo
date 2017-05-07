@@ -21,11 +21,6 @@ public abstract class CrudService<D extends ICrudDao<T>, T extends BaseEntity<T>
 	 * @param id
 	 * @return
 	 */
-	@Cacheable(
-			namespace = "demo", 
-			fieldsKey = { "#entityClass.name", "#id" }, 
-			expire = 86400
-			)
 	public T get(Class<T> entityClass,String id) {
 		return dao.get(entityClass, id);
 	}

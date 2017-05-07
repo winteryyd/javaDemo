@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.deppon.demo.mybatis.dao.TestDao">
+<mapper namespace="com.deppon.demo.mybatis.dao.TestDaoImpl">
 	
 	<update id="initTable" parameterType="TestEntity">
 		DELETE FROM testentity
@@ -13,7 +13,7 @@
 		birth,
 		addr
 		FROM testentity
-		where id = #{param2}
+		where id = #{id}
 	</select>
 
 	<insert id="insert" parameterType="TestEntity">
