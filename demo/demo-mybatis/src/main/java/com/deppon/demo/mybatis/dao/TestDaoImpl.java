@@ -9,7 +9,6 @@ import com.deppon.demo.mybatis.base.CrudDao;
 @Repository
 public class TestDaoImpl extends CrudDao<TestEntity> implements ITestDao{
 
-	@Override
 	public void initTable(TestEntity entity) {
 		getSqlSession().update(buildStatement(getNamespace(), "initTable"),entity);
 	}
