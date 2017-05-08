@@ -11,7 +11,7 @@ public abstract class CrudDao<T> extends MbiBaseDao implements ICrudDao<T> {
 	public abstract String getNamespace();
 	
 	@Cacheable(
-			namespace = "demo", 
+			//namespace = "demo", 
 			fieldsKey = { "#entityClass.name", "#id" }, 
 			expire = 86400
 			)
@@ -23,7 +23,7 @@ public abstract class CrudDao<T> extends MbiBaseDao implements ICrudDao<T> {
 	}
 
 	@CacheSave(
-			namespace = "demo", 
+			//namespace = "demo", 
 			fieldsKey = { "#entity.getClass().name","#entity.id"}, 
 			expire = 86400
 			)
@@ -32,7 +32,7 @@ public abstract class CrudDao<T> extends MbiBaseDao implements ICrudDao<T> {
 	}
 
 	@CacheSave(
-			namespace = "demo", 
+			//namespace = "demo", 
 			fieldsKey = { "#entity.getClass().name","#entity.id"}, 
 			expire = 86400
 			)
@@ -41,7 +41,7 @@ public abstract class CrudDao<T> extends MbiBaseDao implements ICrudDao<T> {
 	}
 
 	@CacheDelete(
-			namespace = "demo", 
+			//namespace = "demo", 
 			fieldsKey = { "#entity.getClass().name","#entity.id"}
 			)
 	public int delete(T entity) {
