@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.deppon</groupId>
-			<artifactId>demo-jdbc</artifactId>
+			<artifactId>demo-mybatis</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 

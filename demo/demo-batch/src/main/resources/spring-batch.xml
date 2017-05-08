@@ -80,7 +80,37 @@
 		<property name="ignoreUnresolvablePlaceholders" value="false" />
 		<property name="order" value="1" />
 	</bean>
-
+	
+    <!-- ################################################### -->
+    <!--              Job Component Configuration            -->
+    <!-- ################################################### -->
+    
+    <bean id="testReader" class="com.deppon.demo.batch.ItemReader.ItemfromJdbc"
+		scope="step">
+		<property name="clazz" value="com.deppon.demo.base.entity.TestEntity" />
+	</bean>
+	<bean id="testProcessor" class="com.deppon.demo.batch.ItemProcessor.AdepterItemProcessor"></bean>
+	<bean id="testWriter" class="com.deppon.demo.batch.ItemWriter.MyItemWriter"></bean>
+	<bean id="itemToRedisWriter" class="com.deppon.demo.batch.ItemWriter.ItemToRedisWriter"></bean>
+    
+	<batch:job id="testEntityBatchJob" restartable="true">
+		<batch:step id="testEntityBatchStep">
+			<batch:tasklet>
+				<batch:chunk processor="testProcessor"
+					writer="itemToRedisWriter" commit-interval="10">
+					<batch:reader>
+						<bean class="org.mybatis.spring.batch.MyBatisPagingItemReader" scope="step">
+                            <property name="pageSize" value="10"/>
+                            <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+                            <property name="queryId"
+                                      value="com.deppon.demo.mybatis.dao.TestDaoImpl.pushCache"/>
+                        </bean>
+					</batch:reader>
+				</batch:chunk>
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+    
 	<batch:job id="testBatchJob">
 		<batch:step id="testBatchStep">
 			<batch:tasklet>
@@ -89,12 +119,4 @@
 			</batch:tasklet>
 		</batch:step>
 	</batch:job>
-
-	<bean id="testReader" class="com.deppon.demo.batch.ItemReader.ItemfromJdbc"
-		scope="step">
-		<property name="clazz" value="com.deppon.demo.batch.entity.TestEntity" />
-	</bean>
-	<bean id="testProcessor"
-		class="com.deppon.demo.batch.ItemProcessor.AdepterItemProcessor"></bean>
-	<bean id="testWriter" class="com.deppon.demo.batch.ItemWriter.MyItemWriter"></bean>
 </beans>

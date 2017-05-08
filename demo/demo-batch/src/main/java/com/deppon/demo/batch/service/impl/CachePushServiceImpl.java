@@ -14,7 +14,7 @@ import com.deppon.demo.batch.service.ICachePushService;
 @Service
 public class CachePushServiceImpl extends BaseBatchExecutor implements ICachePushService {
 	
-	@Resource(name = "testBatchJob")
+	@Resource(name = "testEntityBatchJob")
 	private Job job;
 
 	public void pushCache() {
@@ -32,7 +32,7 @@ public class CachePushServiceImpl extends BaseBatchExecutor implements ICachePus
 		// TODO Auto-generated method stub
 		return new JobParametersBuilder()  
 	    .addString("inputFile", "file:./aaaa.txt")
-	    .addDate("date", new Date())  
+	    //.addDate("date", new Date())  
 	    .toJobParameters() ;
 	}
 }
