@@ -43,9 +43,9 @@ public class CacheSaveAspect {
 		/**
 		 * The cacheKey is the full name of redis cache key
 		 */
-		String namespace = cacheUpdate.namespace();
+		//String namespace = cacheUpdate.namespace();
 		String[] fieldsKey = cacheUpdate.fieldsKey();
-		String cacheKey = AopUtils.parseKey(namespace, fieldsKey, method,
+		String cacheKey = AopUtils.parseKey(/*namespace, */fieldsKey, method,
 				jp.getArgs());
 
 		Object value = null;

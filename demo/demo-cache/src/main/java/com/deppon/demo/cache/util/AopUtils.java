@@ -9,7 +9,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 public class AopUtils {
-	private static final String NAMESPACE_SPLIT = "_";
+	//private static final String NAMESPACE_SPLIT = "_";
     private static final String KEY_SPLIT = ":";
 	
 	
@@ -60,7 +60,7 @@ public class AopUtils {
      * Parse key and build a redis key with namespace.
      * The key's definition is support the SpEL Expression
      */
-    public static String parseKey(String namespace, String[] fieldsKey, Method method, Object[] args) {
+    public static String parseKey(/*String namespace, */String[] fieldsKey, Method method, Object[] args) {
         StringBuilder sb = new StringBuilder();
         /**
          * Get method parameters using the spring support library.
@@ -77,7 +77,7 @@ public class AopUtils {
             context.setVariable(paramNameArray[i], args[i]);
         }
 
-        sb.append(namespace).append(NAMESPACE_SPLIT);
+        //sb.append(namespace).append(NAMESPACE_SPLIT);
         for (String key : fieldsKey) {
         	//System.out.println(key);
             Object value = parser.parseExpression(key).getValue(context, Object.class);

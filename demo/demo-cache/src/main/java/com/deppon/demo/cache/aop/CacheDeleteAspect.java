@@ -43,9 +43,9 @@ public class CacheDeleteAspect {
 		/**
 		 * The cacheKey is the full name of redis cache key
 		 */
-		String namespace = cacheUpdate.namespace();
+		//String namespace = cacheUpdate.namespace();
 		String[] fieldsKey = cacheUpdate.fieldsKey();
-		String cacheKey = AopUtils.parseKey(namespace, fieldsKey, method,
+		String cacheKey = AopUtils.parseKey(/*namespace, */fieldsKey, method,
 				jp.getArgs());
 
 //		如果方法本身返回为boolean类型，且删除成功，则删除缓存

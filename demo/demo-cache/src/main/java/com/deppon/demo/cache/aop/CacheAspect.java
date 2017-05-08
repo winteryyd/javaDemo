@@ -47,9 +47,9 @@ public class CacheAspect {
 		/**
          * The cacheKey is the full name of redis cache key
          */
-        String namespace = cacheable.namespace();
+        //String namespace = cacheable.namespace();
         String[] fieldsKey = cacheable.fieldsKey();
-        String cacheKey = AopUtils.parseKey(namespace, fieldsKey, method, pjp.getArgs());
+        String cacheKey = AopUtils.parseKey(/*namespace, */fieldsKey, method, pjp.getArgs());
         Class<? extends DynamicExpireHandler>[] handlers = cacheable.dynamicExpireHandler();
 
         retObj = redisStringCache.get(cacheKey);
