@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import com.deppon.demo.base.annotation.CacheEntity;
+
 /**
  * Entity支持类
  */
+@CacheEntity(fieldsKey = {"id"},expire = 86400)
 public abstract class BaseEntity<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
