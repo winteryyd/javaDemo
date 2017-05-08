@@ -18,6 +18,12 @@
 			<artifactId>demo-myorm</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency> -->
+		
+		<dependency>
+			<groupId>com.deppon</groupId>
+			<artifactId>demo-batch</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

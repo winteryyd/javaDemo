@@ -26,5 +26,5 @@
 	<!-- <import resource="classpath:spring-transaction.xml" /> -->
 	<import resource="classpath:spring-framework.xml" />
 	
-	<!-- <import resource="classpath:spring-batch.xml" /> -->
+	<import resource="classpath:spring-batch.xml" />
 </beans>
