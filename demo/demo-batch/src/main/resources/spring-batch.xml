@@ -80,37 +80,65 @@
 		<property name="ignoreUnresolvablePlaceholders" value="false" />
 		<property name="order" value="1" />
 	</bean>
-	
+	<!-- ################################################### -->
+    <!--               Global Job Configuration              -->
     <!-- ################################################### -->
-    <!--              Job Component Configuration            -->
-    <!-- ################################################### -->
-    
-    <bean id="testReader" class="com.deppon.demo.batch.ItemReader.ItemfromJdbc"
+
+	<batch:job id="abstractJob" restartable="true"
+		job-repository="jobRepository" abstract="true">
+	</batch:job>
+
+    <batch:step id="abstractStep" abstract="true" job-repository="jobRepository">
+        <batch:tasklet transaction-manager="transactionManager" allow-start-if-complete="true" throttle-limit="5">
+            <batch:chunk commit-interval="10"
+                         skip-limit="10"  >
+                <batch:skippable-exception-classes>
+                    <batch:include class="java.lang.Exception"/>
+                </batch:skippable-exception-classes>
+            </batch:chunk>
+            <batch:listeners>
+                <batch:listener ref="stepListener"/>
+            </batch:listeners>
+        </batch:tasklet>
+    </batch:step>
+
+	<bean id="stepListener" class="com.deppon.demo.batch.listener.StepListener"></bean>
+	<!-- ################################################### -->
+	<!-- Job Component Configuration -->
+	<!-- ################################################### -->
+
+	<bean id="testReader" class="com.deppon.demo.batch.ItemReader.ItemfromJdbc"
 		scope="step">
 		<property name="clazz" value="com.deppon.demo.base.entity.TestEntity" />
 	</bean>
-	<bean id="testProcessor" class="com.deppon.demo.batch.ItemProcessor.AdepterItemProcessor"></bean>
+	<bean id="testProcessor"
+		class="com.deppon.demo.batch.ItemProcessor.AdepterItemProcessor"></bean>
 	<bean id="testWriter" class="com.deppon.demo.batch.ItemWriter.MyItemWriter"></bean>
 	<bean id="itemToRedisWriter" class="com.deppon.demo.batch.ItemWriter.ItemToRedisWriter"></bean>
-    
-	<batch:job id="testEntityBatchJob" restartable="true">
-		<batch:step id="testEntityBatchStep">
+
+	<batch:job id="testEntityBatchJob" parent="abstractJob">
+		<batch:step id="testEntityBatchStep" parent="abstractStep">
 			<batch:tasklet>
-				<batch:chunk processor="testProcessor"
-					writer="itemToRedisWriter" commit-interval="10">
+				<batch:chunk processor="testProcessor" writer="itemToRedisWriter">
 					<batch:reader>
-						<bean class="org.mybatis.spring.batch.MyBatisPagingItemReader" scope="step">
-                            <property name="pageSize" value="10"/>
-                            <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-                            <property name="queryId"
-                                      value="com.deppon.demo.mybatis.dao.TestDaoImpl.pushCache"/>
-                        </bean>
+						<bean class="org.mybatis.spring.batch.MyBatisPagingItemReader"
+							scope="step">
+							<property name="pageSize" value="10" />
+							<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+							<property name="queryId"
+								value="com.deppon.demo.mybatis.dao.TestDaoImpl.pushCache" />
+							<property name="parameterValues">
+								<map>
+									<entry key="_ids" value="#{jobParameters['_ids']}" />
+								</map>
+							</property>
+						</bean>
 					</batch:reader>
 				</batch:chunk>
 			</batch:tasklet>
 		</batch:step>
 	</batch:job>
-    
+
 	<batch:job id="testBatchJob">
 		<batch:step id="testBatchStep">
 			<batch:tasklet>

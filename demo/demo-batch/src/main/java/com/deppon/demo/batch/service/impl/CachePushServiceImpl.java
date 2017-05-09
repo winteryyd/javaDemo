@@ -31,8 +31,8 @@ public class CachePushServiceImpl extends BaseBatchExecutor implements ICachePus
 	protected JobParameters getJobParameters() {
 		// TODO Auto-generated method stub
 		return new JobParametersBuilder()  
-	    .addString("inputFile", "file:./aaaa.txt")
-	    //.addDate("date", new Date())  
+	    .addLong("_ids", 0L)
+	    .addDate("date", new Date())  
 	    .toJobParameters() ;
 	}
 }
