@@ -57,6 +57,7 @@
 		birth,
 		addr
 		FROM testentity
+		WHERE id > #{_ids}
 		<![CDATA[
        		limit #{_skiprows},#{_pagesize}
         ]]>
