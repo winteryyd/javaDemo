@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Core Quartz Scheduler -->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="configLocation" value="/WEB-INF/quartz.properties"/>
+        <property name="dataSource" ref="proxyDataSourceForMBI"/>
+        <property name="transactionManager" ref="transactionManagerForMBI"/>
+        <property name="waitForJobsToCompleteOnShutdown" value="true"/>
+        <!-- Set the key of an ApplicationContext reference to expose in the SchedulerContext -->
+        <property name="applicationContextSchedulerContextKey" value="applicationContext"/>
+        <property name="overwriteExistingJobs" value="false"/>
+        <property name="autoStartup" value="true"/>
+        <property name="startupDelay" value="20"/>
+        <property name="jobFactory">
+            <bean class="com.deppon.mbi.module.auth.shared.components.AutowiringSpringBeanJobFactory"/>
+        </property>
+        <property name="globalJobListeners">
+            <list>
+                <bean class="com.deppon.demo.quartz.listener.QuartzJobListener"/>
+            </list>
+        </property>
+        <property name="triggers">
+        </property>
+        <property name="jobDetails">
+        </property>
+    </bean>
+</beans>

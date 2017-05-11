@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.deppon</groupId>
-			<artifactId>demo-jdbc</artifactId>
+			<artifactId>demo-batch</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
@@ -27,15 +27,22 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- Quartz -->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>${quartz.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz-jobs</artifactId>
-            <version>${quartz.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>${quartz.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.transaction/jta -->
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
 	</dependencies>
 </project>
