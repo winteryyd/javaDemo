@@ -15,7 +15,7 @@
         <property name="autoStartup" value="true"/>
         <property name="startupDelay" value="20"/>
         <property name="jobFactory">
-            <bean class="com.deppon.mbi.module.auth.shared.components.AutowiringSpringBeanJobFactory"/>
+            <bean class="com.deppon.demo.quartz.components.AutowiringSpringBeanJobFactory"/>
         </property>
         <property name="globalJobListeners">
             <list>
