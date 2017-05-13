@@ -27,4 +27,5 @@
 	<import resource="classpath:spring-framework.xml" />
 	
 	<import resource="classpath:spring-batch.xml" />
+	<import resource="classpath:spring-quartz.xml" />
 </beans>
