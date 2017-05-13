@@ -1,30 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/jdbc
+	 http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <!-- Core Quartz Scheduler -->
-    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="configLocation" value="/WEB-INF/quartz.properties"/>
-        <property name="dataSource" ref="proxyDataSourceForMBI"/>
-        <property name="transactionManager" ref="transactionManagerForMBI"/>
-        <property name="waitForJobsToCompleteOnShutdown" value="true"/>
-        <!-- Set the key of an ApplicationContext reference to expose in the SchedulerContext -->
-        <property name="applicationContextSchedulerContextKey" value="applicationContext"/>
-        <property name="overwriteExistingJobs" value="false"/>
-        <property name="autoStartup" value="true"/>
-        <property name="startupDelay" value="20"/>
-        <property name="jobFactory">
-            <bean class="com.deppon.demo.quartz.components.AutowiringSpringBeanJobFactory"/>
-        </property>
-        <property name="globalJobListeners">
-            <list>
-                <bean class="com.deppon.demo.quartz.listener.QuartzJobListener"/>
-            </list>
-        </property>
-        <property name="triggers">
-        </property>
-        <property name="jobDetails">
-        </property>
-    </bean>
+	<!-- Initialise the database if enabled: -->
+	<jdbc:initialize-database data-source="dataSource"
+		enabled="true" ignore-failures="DROPS">
+		<jdbc:script location="classpath:/dbTables/tables_mysql.sql" />
+	</jdbc:initialize-database>
+
+	<!-- Core Quartz Scheduler -->
+	<bean id="scheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="configLocation" value="classpath:quartz.properties" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="waitForJobsToCompleteOnShutdown" value="true" />
+		<!-- Set the key of an ApplicationContext reference to expose in the SchedulerContext -->
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+		<property name="overwriteExistingJobs" value="false" />
+		<property name="autoStartup" value="true" />
+		<property name="startupDelay" value="20" />
+		<!-- <property name="jobFactory">
+			<bean
+				class="com.deppon.demo.quartz.components.AutowiringSpringBeanJobFactory" />
+		</property> -->
+		<property name="globalJobListeners">
+			<list>
+				<bean class="com.deppon.demo.quartz.listener.QuartzJobListener" />
+			</list>
+		</property>
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="quartzJobCleanTrigger" /> -->
+				<ref bean="cacheJobCleanTrigger" />
+			</list>
+		</property>
+		<!-- <property name="jobDetails">
+			<list>
+				<ref bean="quartzJobCleanJobDetail" />
+				<ref bean="cacheJobCleanJobDetail" />
+			</list>
+		</property> -->
+	</bean>
+
+	<!--Quartz 日志清理定时任务 每天晚上1点执行 -->
+	<bean id="quartzJobCleanTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="quartzJobCleanJobDetail" />
+		<property name="group" value="triggerGroup1" />
+		<property name="misfireInstructionName" value="MISFIRE_INSTRUCTION_SMART_POLICY" />
+		<property name="cronExpression" value="*/10 * * * * ?" />
+	</bean>
+
+	<bean id="quartzJobCleanJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.deppon.demo.quartz.job.QuartzLogCleanJob" />
+		<property name="durability" value="true" />
+		<property name="requestsRecovery" value="true" />
+		<property name="group" value="group1" />
+		<property name="description" value="测试定时任务" />
+	</bean>
+	
+	<!--测试缓存-->
+	<bean id="cacheJobCleanTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="cacheJobCleanJobDetail" />
+		<property name="group" value="triggerGroup1" />
+		<property name="misfireInstructionName" value="MISFIRE_INSTRUCTION_SMART_POLICY" />
+		<property name="cronExpression" value="*/10 * * * * ?" />
+	</bean>
+
+	<bean id="cacheJobCleanJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.deppon.demo.quartz.job.CachePushJob" />
+		<property name="durability" value="true" />
+		<property name="requestsRecovery" value="true" />
+		<property name="group" value="group1" />
+		<property name="description" value="测试定时任务" />
+	</bean>
 </beans>
