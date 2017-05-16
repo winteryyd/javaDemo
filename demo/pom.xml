@@ -7,18 +7,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>demo-base</module>
-		<module>demo-jdbc</module>
-		<module>demo-cache</module>
-		<module>demo-framework</module>
-		<!-- <module>demo-myorm</module> -->
-		<module>demo-mybatis</module>
-		<module>demo-server</module>
-		<module>demo-batch</module>
-		<module>demo-quartz</module>
-		<module>demo-web</module>
+		<!-- <module>demo-base</module>
+		<module>demo-jdbc</module> -->
+		<!-- <module>demo-cache</module> -->
+		<!-- <module>demo-framework</module>
+		<module>demo-myorm</module> -->
+		<!-- <module>demo-mybatis</module> -->
+		<!-- <module>demo-server</module> -->
+		<!-- <module>demo-batch</module>
+		<module>demo-quartz</module> -->
+		<!-- <module>demo-web</module> -->
 		<!-- <module>demo-transaction</module> -->
-		<!--<module>demo-java</module> -->
+		<module>demo-java</module>
 
 
 
