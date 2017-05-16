@@ -1,4 +1,4 @@
-package com.deppon.demo.server.controller;
+/*package com.deppon.demo.server.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,3 +22,4 @@ public class BatchController {
 	}
 	
 }
+*/

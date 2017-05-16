@@ -8,17 +8,17 @@
 	</parent>
 	<artifactId>demo-server</artifactId>
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.deppon</groupId>
 			<artifactId>demo-mybatis</artifactId>
 			<version>${project.parent.version}</version>
-		</dependency>
-		<!-- <dependency>
+		</dependency> -->
+		<dependency>
 			<groupId>com.deppon</groupId>
 			<artifactId>demo-myorm</artifactId>
 			<version>${project.parent.version}</version>
-		</dependency> -->
-		<dependency>
+		</dependency>
+		<!-- <dependency>
 			<groupId>com.deppon</groupId>
 			<artifactId>demo-batch</artifactId>
 			<version>${project.parent.version}</version>
@@ -28,7 +28,7 @@
 			<groupId>com.deppon</groupId>
 			<artifactId>demo-quartz</artifactId>
 			<version>${project.parent.version}</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
