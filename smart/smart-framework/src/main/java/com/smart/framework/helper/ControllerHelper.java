@@ -45,6 +45,11 @@ public final class ControllerHelper {
                 }
             }
         }
+        
+        for(Map.Entry<Request, Handler> entry: ACTION_MAP.entrySet()){
+        	System.out.println(entry.getKey().toString());
+        	System.out.println(entry.getValue().toString());
+        }
     }
 
     /**
