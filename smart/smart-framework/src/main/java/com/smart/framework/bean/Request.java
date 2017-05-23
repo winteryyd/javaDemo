@@ -42,4 +42,9 @@ public class Request {
     public boolean equals(Object obj) {
         return EqualsBuilder.reflectionEquals(this, obj);
     }
+    
+    @Override
+    public String toString(){
+		return requestMethod+":"+requestPath;
+    }
 }

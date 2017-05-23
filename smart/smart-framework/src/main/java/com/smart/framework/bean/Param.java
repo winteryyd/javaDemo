@@ -20,6 +20,9 @@ public class Param {
 
     private List<FileParam> fileParamList;
 
+    public Param(){    	
+    }
+    
     public Param(List<FormParam> formParamList) {
         this.formParamList = formParamList;
     }

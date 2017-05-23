@@ -31,4 +31,8 @@ public class Handler {
     public Method getActionMethod() {
         return actionMethod;
     }
+    
+    public String toString(){
+		return controllerClass.getName()+"-->"+actionMethod.getName();
+    }
 }
