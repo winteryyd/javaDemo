@@ -52,9 +52,13 @@ public class DispatcherServlet extends HttpServlet {
         jspServlet.addMapping("/index.jsp");
         jspServlet.addMapping(ConfigHelper.getAppJspPath() + "*");
 
+        System.out.println(jspServlet.getMappings());
         ServletRegistration defaultServlet = servletContext.getServletRegistration("default");
         defaultServlet.addMapping("/favicon.ico");
         defaultServlet.addMapping(ConfigHelper.getAppAssetPath() + "*");
+        System.out.println(defaultServlet.getMappings());
+        
+        
     }
 
     @Override
@@ -77,11 +81,13 @@ public class DispatcherServlet extends HttpServlet {
 
                 Object result;
                 Method actionMethod = handler.getActionMethod();
-                if (param.isEmpty()) {
+                /*if (param.isEmpty()) {
                     result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
                 } else {
                     result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
-                }
+                }*/
+                
+                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
 
                 if (result instanceof View) {
                     handleViewResult((View) result, request, response);
