@@ -17,6 +17,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>smart-web</finalName>
 		<plugins>
 			<!-- Tomcat -->
 			<plugin>
