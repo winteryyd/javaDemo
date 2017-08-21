@@ -1,7 +1,4 @@
-RUN cname = $(docker images | grep 'sb' | awk '{print $1}') \
-if [ "$cname" != "" ]; then \
-docker rmi -f $cname \
-fi
+RUN docker rmi -f test-sb/sb
 From java
 MAINTAINER "yandong"<xxxxx@xxx.com>
 VOLUME /tmp
