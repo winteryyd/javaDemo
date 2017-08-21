@@ -28,7 +28,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- 
+			
 			<plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -45,7 +45,7 @@
                         </resource>
                     </resources>
                 </configuration>
-            </plugin> -->
+            </plugin>
 		</plugins>
 	</build>
 
