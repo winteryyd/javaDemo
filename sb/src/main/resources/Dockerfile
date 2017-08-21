@@ -1,3 +1,7 @@
+cname = $(docker images | grep 'sb' | awk '{print $1}')
+if [ "$cname" != "" ]; then 
+docker rmi -f $cname
+fi
 From java
 MAINTAINER "yandong"<xxxxx@xxx.com>
 VOLUME /tmp
