@@ -16,4 +16,9 @@ public class HelloApplication {
 	public String www(){
 		return "hello world! www";
 	}
+	
+	@RequestMapping(method=RequestMethod.GET,path="/www1")
+	public String www1(){
+		return "hello world! www";
+	}
 }
