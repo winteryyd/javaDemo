@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>test-springboot</groupId>
 		<artifactId>springboot</artifactId>
-		<version>1.0.0</version>
+		<version>latest</version>
 	</parent>
 	<artifactId>springboot-zookeeper</artifactId>
 
