@@ -30,8 +30,8 @@ public class WebListener implements ApplicationListener<EmbeddedServletContainer
 	public void onApplicationEvent(EmbeddedServletContainerInitializedEvent event) {
 		this.serverPort = event.getEmbeddedServletContainer().getPort();
 		try {
-			serverAddress = InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
+			serverAddress = WebToolUtils.getLocalIP();
+        } catch (Exception e) {
         	logger.error("get server host Exception e:", e);
         }
 		
