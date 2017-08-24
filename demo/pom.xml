@@ -7,18 +7,16 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<!-- <module>demo-base</module>
-		<module>demo-jdbc</module> -->
+		<!-- <module>demo-base</module> -->
+		<!-- <module>demo-jdbc</module> -->
 		<!-- <module>demo-cache</module> -->
-		<!-- <module>demo-framework</module>
-		<module>demo-myorm</module> -->
+		<!-- <module>demo-framework</module> <module>demo-myorm</module> -->
 		<!-- <module>demo-mybatis</module> -->
-		<!-- <module>demo-server</module> -->
-		<!-- <module>demo-batch</module>
-		<module>demo-quartz</module> -->
-		<!-- <module>demo-web</module> -->
-		<!-- <module>demo-transaction</module> -->
-		<module>demo-java</module>
+		<module>demo-server</module>
+		<!-- <module>demo-batch</module> <module>demo-quartz</module> -->
+		<module>demo-web</module>
+		<!-- <module>demo-transaction</module>
+		<module>demo-java</module> -->
 
 
 
@@ -224,6 +222,12 @@
 			<version>3.4</version>
 		</dependency>
 
+		<!-- CGLib -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2.2</version>
+		</dependency>
 		<dependency>
 			<groupId>org.lazyluke</groupId>
 			<artifactId>log4jdbc-remix</artifactId>
