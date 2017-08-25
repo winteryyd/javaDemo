@@ -30,9 +30,9 @@ app.all('*',function(req,res){
 		res.end();
 		return;
 	}
-	var serviceName=req.path;
-	console.log('Service-path: %s',serviceName);
-	var servicePath = REGISTRY_ROOT+serviceName;
+	var servicePath=req.path;
+	console.log('Service-Path: %s',servicePath);
+	var servicePath = REGISTRY_ROOT+servicePath;
 	zk.getChildren(servicePath,function(error,children,stat){
 		if(error){
 			console.log(error.stack);
@@ -58,7 +58,7 @@ app.all('*',function(req,res){
 				res.end();
 				return;
 			}
-			console.log('serviceAddress: %s',serviceAddress);
+			console.log('serviceAddress: %s',serviceAddress+servicePath);
 			if(!serviceAddress){
 				console.log('serviceAddress node is not exist');
 				res.end();
