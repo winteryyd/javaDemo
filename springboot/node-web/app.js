@@ -31,6 +31,7 @@ app.all('*',function(req,res){
 		return;
 	}
 	var servicePath=req.path;
+	console.log('-------------------------------------------');
 	console.log('Service-Path: %s',servicePath);
 	var servicePath = REGISTRY_ROOT+servicePath;
 	zk.getChildren(servicePath,function(error,children,stat){
