@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/app/test")
+@RequestMapping("/app")
 public class HelloApplication {
 	@RequestMapping(name = "HelloService",method=RequestMethod.GET,path="/hello")
 	public String hello(){
 		return "Hello";
 	}
 	
-	@RequestMapping(name = "WorldService",method=RequestMethod.GET,path={"/world","/www"})
+	@RequestMapping(name = "WorldService",method=RequestMethod.GET,path={"/world"})
 	public String world(){
 		return "World";
 	}
