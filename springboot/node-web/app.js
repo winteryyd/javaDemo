@@ -30,7 +30,6 @@ app.all('*',function(req,res){
 		res.end();
 		return;
 	}
-	console.log(req.path);
 	var serviceName=req.path;
 	console.log('Service-path: %s',serviceName);
 	var servicePath = REGISTRY_ROOT+serviceName;
