@@ -3,7 +3,7 @@ var zookeeper  = require('node-zookeeper-client');
 var httpProxy = require('http-proxy');
 
 var PORT = 1234;
-var addr = '192.168.56.134:2181';
+var addr = '192.168.56.31:2181,192.168.56.32:2181,192.168.56.33:2181';
 var options = {
 		sessionTimeout:5000
 };
@@ -16,13 +16,11 @@ zk.on('connected',function(){
 });
 zk.connect();
 
-//创建代理服务器对象并监听错误事件
 var proxy = httpProxy.createProxyServer();
 proxy.on('error',function(err,req,res){
-	res.end();//输出空白响应数据
+	res.end();
 })
 
-//启动web服务器
 var app = express();
 app.use(express.static('public'));
 
@@ -68,7 +66,7 @@ app.all('*',function(req,res){
 				return;
 			}
 			proxy.web(req,res,{
-				target:'http://'+serviceAddress  //目标地址
+				target:'http://'+serviceAddress  
 			});
 		});
 	});
