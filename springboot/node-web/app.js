@@ -32,7 +32,7 @@ app.all('*',function(req,res){
 	}
 	console.log(req.path);
 	var serviceName=req.path;
-	console.log('Service-Name: %s',serviceName);
+	console.log('Service-path: %s',serviceName);
 	var servicePath = REGISTRY_ROOT+serviceName;
 	zk.getChildren(servicePath,function(error,children,stat){
 		if(error){
